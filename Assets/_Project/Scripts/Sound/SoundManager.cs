@@ -1,3 +1,4 @@
+using _Project.Scripts.Sound.Handles;
 using FMOD.Studio;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace _Project.Scripts.Sound
     public class SoundManager : MonoBehaviour
     {
         public static SoundManager Instance { get; private set; }
+
+        public SampleHandle SampleHandle { get; private set; } = new();
 
         private Bus _bgBus;
         private Bus _sfxBus;
@@ -47,6 +50,8 @@ namespace _Project.Scripts.Sound
             
             BgVolume = PlayerPrefs.GetFloat("bg", 1f);
             SfxVolume = PlayerPrefs.GetFloat("sfx", 0.75f);
+
+            SampleHandle.Initialize();
         }
     }
 }
