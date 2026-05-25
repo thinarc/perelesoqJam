@@ -9,7 +9,7 @@ namespace _Project.Scripts.Sound.Handles
         
         public void Initialize() { }
 
-        public void CommandSample()
+        public void CommandExample()
         {
             _clip = RuntimeManager.CreateInstance("event:/Path/ToEvent");
             _clip.start();
