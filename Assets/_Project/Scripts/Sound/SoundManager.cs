@@ -45,11 +45,11 @@ namespace _Project.Scripts.Sound
 
         public void Initialize()
         {
-            _bgBus = FMODUnity.RuntimeManager.GetBus("bus:/bg");
-            _sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/sfx");
-            
-            BgVolume = PlayerPrefs.GetFloat("bg", 1f);
-            SfxVolume = PlayerPrefs.GetFloat("sfx", 0.75f);
+            // _bgBus = FMODUnity.RuntimeManager.GetBus("bus:/bg");
+            // _sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/sfx");
+            //
+            // BgVolume = PlayerPrefs.GetFloat("bg", 1f);
+            // SfxVolume = PlayerPrefs.GetFloat("sfx", 0.75f);
 
             SampleHandle.Initialize();
         }
