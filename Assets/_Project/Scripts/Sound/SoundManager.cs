@@ -1,7 +1,11 @@
+// foler with our handels
 using _Project.Scripts.Sound.Handles;
+
+// a library cenntections
 using FMOD.Studio;
 using UnityEngine;
 
+// file path
 namespace _Project.Scripts.Sound
 {
     public class SoundManager : MonoBehaviour
@@ -9,49 +13,44 @@ namespace _Project.Scripts.Sound
         public static SoundManager Instance { get; private set; }
 
         public SampleHandle SampleHandle { get; private set; } = new();
-
-        private Bus _bgBus;
-        private Bus _sfxBus;
         
-        private float _bgVolume;
+        // add other handles
+        public MusicHandle MusicHandle { get; private set; } = new();
+        
+        // add other Buses
+        private Bus _allMusicBus;
+        
+        // storage of buses variables (All_Music Bus)
+        private float _musicVolume;
+        public float MusicVolume
 
-        public float BgVolume
         {
-            get => _bgVolume;
+            get => _musicVolume; // get a current meaning 
             set
             {
                 if (value is > 1f or < 0) return;
-                _bgVolume = value;
-                _bgBus.setVolume(_bgVolume);
-                PlayerPrefs.SetFloat("bg", _bgVolume);
+                _musicVolume = value;
+                _allMusicBus.setVolume(_musicVolume);
+                PlayerPrefs.SetFloat("All_Music", _musicVolume);
             }
         }
+        // storage of buses variables (Other Bus) 
         
-        private float _sfxVolume;
         
-        public float SfxVolume
-        {
-            get => _sfxVolume;
-            set
-            {
-                if (value is > 1f or < 0) return;
-                _sfxVolume = value;
-                _sfxBus.setVolume(_sfxVolume);
-                PlayerPrefs.SetFloat("sfx", _sfxVolume);
-            }
-        }
-
+    
+        // all metods
         private void Awake() => Instance = this;
 
         public void Initialize()
         {
-            // _bgBus = FMODUnity.RuntimeManager.GetBus("bus:/bg");
+            _allMusicBus = FMODUnity.RuntimeManager.GetBus("bus:/All_Music");
             // _sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/sfx");
             //
-            // BgVolume = PlayerPrefs.GetFloat("bg", 1f);
+            MusicVolume = PlayerPrefs.GetFloat("All_Music", 1f);
             // SfxVolume = PlayerPrefs.GetFloat("sfx", 0.75f);
 
             SampleHandle.Initialize();
+            MusicHandle.Initialize();
         }
     }
 }
