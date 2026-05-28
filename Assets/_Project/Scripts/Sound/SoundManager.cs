@@ -11,8 +11,6 @@ namespace _Project.Scripts.Sound
     public class SoundManager : MonoBehaviour
     {
         public static SoundManager Instance { get; private set; }
-
-        public SampleHandle SampleHandle { get; private set; } = new();
         
         // add other handles
         public MusicHandle MusicHandle { get; private set; } = new();
@@ -48,8 +46,7 @@ namespace _Project.Scripts.Sound
             //
             MusicVolume = PlayerPrefs.GetFloat("All_Music", 1f);
             // SfxVolume = PlayerPrefs.GetFloat("sfx", 0.75f);
-
-            SampleHandle.Initialize();
+            
             MusicHandle.Initialize();
         }
     }
