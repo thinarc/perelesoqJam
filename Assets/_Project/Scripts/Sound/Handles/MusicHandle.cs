@@ -39,7 +39,7 @@ namespace _Project.Scripts.Sound.Handles
         //Lets stop the music
         public void StopMusic()
         {
-            _currentTrack.stop(STOP_MODE.ALLOWFADEOUT);
+            _currentTrack.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
 
         public void PauseMusic()
@@ -56,7 +56,7 @@ namespace _Project.Scripts.Sound.Handles
         // check: does a current track exist?
         {
             if (_currentTrack.isValid())
-                _currentTrack.stop(STOP_MODE.ALLOWFADEOUT);
+                _currentTrack.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             _currentTrack = newTrack;
             _currentTrack.start();
         }
