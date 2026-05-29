@@ -13,6 +13,7 @@ namespace _Project.Scripts.Sound.Handles
     {
         private EventInstance _mainTheme;
         private EventInstance _pianoTheme;
+        private EventInstance _bgCello;
         
         // save the link what is current track
         private EventInstance _currentTrack;
@@ -22,6 +23,7 @@ namespace _Project.Scripts.Sound.Handles
         {
             _mainTheme = RuntimeManager.CreateInstance("event:/Music/Main_Them");
             _pianoTheme = RuntimeManager.CreateInstance("event:/Music/S_Piano_Th");
+			_bgCello = RuntimeManager.CreateInstance("event:/Music/Bg_Cello");
         }
 
         
@@ -34,12 +36,16 @@ namespace _Project.Scripts.Sound.Handles
         {
             SwitchTo(_pianoTheme);
         }
+		public void PlayBgCello()
+		{
+			SwitchTo(_bgCello);
+		}
         
         
         //Lets stop the music
         public void StopMusic()
         {
-            _currentTrack.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            _currentTrack.stop(STOP_MODE.ALLOWFADEOUT);
         }
 
         public void PauseMusic()
@@ -56,7 +62,7 @@ namespace _Project.Scripts.Sound.Handles
         // check: does a current track exist?
         {
             if (_currentTrack.isValid())
-                _currentTrack.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                _currentTrack.stop(STOP_MODE.ALLOWFADEOUT);
             _currentTrack = newTrack;
             _currentTrack.start();
         }

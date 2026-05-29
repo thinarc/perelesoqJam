@@ -2,10 +2,10 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="MixerGroup" id="{f8d464f4-33f8-41e9-a1ab-f27f508f2bb9}">
 		<property name="color">
-			<value>Red</value>
+			<value>Purple</value>
 		</property>
 		<property name="name">
-			<value>All_Music</value>
+			<value>Bg</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{9488a10d-ca1e-4bc4-b0ae-a1f7a3c3f2f2}</destination>

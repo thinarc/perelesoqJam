@@ -16,9 +16,9 @@ namespace _Project.Scripts.Sound
         public MusicHandle MusicHandle { get; private set; } = new();
         
         // add other Buses
-        private Bus _allMusicBus;
+        private Bus _bg;
         
-        // storage of buses variables (All_Music Bus)
+        // storage of buses variables (Bg Bus)
         private float _musicVolume;
         public float MusicVolume
 
@@ -29,7 +29,7 @@ namespace _Project.Scripts.Sound
                 if (value is > 1f or < 0) return;
                 _musicVolume = value;
                 _allMusicBus.setVolume(_musicVolume);
-                PlayerPrefs.SetFloat("All_Music", _musicVolume);
+                PlayerPrefs.SetFloat("Bg", _musicVolume);
             }
         }
         // storage of buses variables (Other Bus) 
@@ -41,10 +41,10 @@ namespace _Project.Scripts.Sound
 
         public void Initialize()
         {
-            _allMusicBus = FMODUnity.RuntimeManager.GetBus("bus:/All_Music");
+            _allMusicBus = FMODUnity.RuntimeManager.GetBus("bus:/Bg");
             // _sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/sfx");
             //
-            MusicVolume = PlayerPrefs.GetFloat("All_Music", 1f);
+            MusicVolume = PlayerPrefs.GetFloat("Bg", 1f);
             // SfxVolume = PlayerPrefs.GetFloat("sfx", 0.75f);
             
             MusicHandle.Initialize();
