@@ -2,6 +2,7 @@ using _Project.Scripts.Common.EntryPoints;
 using _Project.Scripts.Sound;
 using DG.Tweening;
 using Sirenix.Utilities;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,19 @@ namespace _Project.Scripts.Game.Menus
     public class MainMenu : MonoBehaviour
     {
         [SerializeField] private Slider volume;
-        [SerializeField] private Image[] volumeHints = new Image[4]; 
+        [SerializeField] private Image[] volumeHints = new Image[4];
+
+        [SerializeField, Space(5)] private CanvasGroup creditsGroup;
+        [SerializeField] private Button creditsButton;
+        
+        [SerializeField, Space(5)] private TextMeshProUGUI startText;
+        [SerializeField] private ParticleSystem rain;
+        
+        [SerializeField, Space(5)] private TextMeshProUGUI headerText;
         
         private CanvasGroup _group;
+        private bool _open;
+        private bool _started;
         
         private void Start()
         {
@@ -21,30 +32,96 @@ namespace _Project.Scripts.Game.Menus
             _group.interactable = false;
             _group.blocksRaycasts = false;
 
-            volume.value = SoundManager.Instance.MasterVolume;
+            creditsGroup.transform.DOScale(0.8f, 0);
+            creditsGroup.DOFade(0, 0);
+            creditsGroup.interactable = false;
+            creditsGroup.blocksRaycasts = false;
+
+            volume.value = SoundManager.Instance.Volume;
             ChooseVolumeHint();
         }
 
-        public void ShowMenu()
+        private void Update()
         {
-            _group.DOFade(1, 0.4f).SetEase(Ease.InOutSine);
-            _group.interactable = true;
-            _group.blocksRaycasts = true;
+            if (_started && !_open && Input.GetKeyUp(KeyCode.Escape)) ShowMenu(true);
+            else if (_started && _open && Input.GetKeyUp(KeyCode.Escape)) CloseMenu(true);
         }
 
-        public void CloseMenu()
+        public void ShowMenu(bool pause = false)
         {
-            _group.DOFade(0, 0.1f).SetEase(Ease.InOutSine);
+            _group.DOFade(1, 0.4f).SetEase(Ease.InOutSine).SetUpdate(true).OnComplete(() => rain.gameObject.SetActive(true));
+            _group.interactable = true;
+            _group.blocksRaycasts = true;
+            
+            _open = true;
+            Time.timeScale = 0;
+
+            if (pause)
+            {
+                creditsButton.gameObject.SetActive(false);
+                startText.text = "Вернуться";
+                headerText.text = "Пауза";
+            }
+        }
+
+        public void CloseMenu(bool pause = false)
+        {
+            _group.DOFade(0, 0.2f).SetEase(Ease.InOutSine).SetUpdate(true);
             _group.interactable = false;
             _group.blocksRaycasts = false;
             
-            GameEntryPoint.Instance.locationSwitcher.StartLocation();
+            rain.gameObject.SetActive(false);
+            
+            if (!pause && !_started) GameEntryPoint.Instance.locationSwitcher.StartLocation();
+            else headerText.text = "";
+            
+            Time.timeScale = 1;
+            _open = false;
+            _started = true;
+        }
+        
+        public void ShowCredits()
+        {
+            creditsGroup.transform.DOScale(1, 0.1f).SetEase(Ease.InOutSine).SetUpdate(true);
+            creditsGroup.DOFade(1, 0.1f).SetEase(Ease.InOutSine).SetUpdate(true);
+            creditsGroup.interactable = true;
+            creditsGroup.blocksRaycasts = true;
+            headerText.text = "Мы";
+        }
+
+        public void CloseCredits()
+        {
+            creditsGroup.transform.DOScale(0.8f, 0.2f).SetEase(Ease.InOutSine).SetUpdate(true);
+            creditsGroup.DOFade(0, 0.08f).SetEase(Ease.InOutSine).SetUpdate(true);
+            creditsGroup.interactable = false;
+            creditsGroup.blocksRaycasts = false;
+            headerText.text = "Напротив";
         }
 
         public void OnVolumeChange()
         {
-            SoundManager.Instance.MasterVolume = volume.value;
+            SoundManager.Instance.Volume = volume.value;
             ChooseVolumeHint();
+        }
+        
+        public void OnVolume()
+        {
+            if (_pastVolume < 0.2f) _pastVolume = 0.2f;
+            SoundManager.Instance.Volume = _pastVolume;
+            ChooseVolumeHint();
+            
+            volume.value = SoundManager.Instance.Volume;
+        }
+
+        private float _pastVolume;
+
+        public void OffVolume()
+        {
+            _pastVolume = SoundManager.Instance.Volume;
+            SoundManager.Instance.Volume = 0f;
+            ChooseVolumeHint();
+            
+            volume.value = SoundManager.Instance.Volume;
         }
 
         private void ChooseVolumeHint()

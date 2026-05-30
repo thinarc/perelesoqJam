@@ -8,7 +8,7 @@ namespace _Project.Scripts.Common.EntryPoints
     {
         private void Start()
         {
-            PlayerPrefs.SetFloat("volume", 0.6f);
+            Cursor.lockState = CursorLockMode.Confined;
             
             SoundManager.Instance.Initialize();
             
