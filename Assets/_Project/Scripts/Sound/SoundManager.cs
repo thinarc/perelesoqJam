@@ -47,7 +47,7 @@ namespace _Project.Scripts.Sound
         
         public void Initialize()
         {
-            _volumeBus = FMODUnity.RuntimeManager.GetBus("bus:/volume");
+            _volumeBus = FMODUnity.RuntimeManager.GetBus("bus:/");
             Volume = PlayerPrefs.GetFloat("volume", 0.6f);
             
             MusicHandle.Initialize();
