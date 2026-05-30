@@ -9,8 +9,6 @@ namespace _Project.Scripts.Game.Locations
 {
     public class LocationSwitcher : MonoBehaviour
     {
-        [SerializeField] private Image[] transitions;
-
         [SerializeField, Space(5)] private List<LocationData> locations;
 
         [SerializeField, Space(5)] private CanvasGroup buttonGroup;
@@ -41,8 +39,8 @@ namespace _Project.Scripts.Game.Locations
             _group.interactable = true;
             _group.blocksRaycasts = true;
             
-            transitions[0].sprite = locations[0].capture;
-            transitions[1].DOFade(0, 0);
+            locations.ForEach(l => l.scene.DOFade(0, 0));
+            locations[0].scene.DOFade(1, 0);
             
             _currentLoc = locations[0];
             InitButtons();
@@ -64,46 +62,45 @@ namespace _Project.Scripts.Game.Locations
             
             if (_currentLoc.directions.left != "")
             {
-                buttons[0].onClick.AddListener(() => ToLocation(_currentLoc.directions.left, buttons[0]));
+                buttons[0].onClick.AddListener(() => ToLocation(_currentLoc.directions.left));
                 buttons[0].gameObject.SetActive(true);
             }
 
             if (_currentLoc.directions.right != "")
             {
-                buttons[1].onClick.AddListener(() => ToLocation(_currentLoc.directions.right, buttons[1]));
+                buttons[1].onClick.AddListener(() => ToLocation(_currentLoc.directions.right));
                 buttons[1].gameObject.SetActive(true);
             }
 
             if (_currentLoc.directions.bottom != "")
             {
-                buttons[2].onClick.AddListener(() => ToLocation(_currentLoc.directions.bottom, buttons[2]));
+                buttons[2].onClick.AddListener(() => ToLocation(_currentLoc.directions.bottom));
                 buttons[2].gameObject.SetActive(true);
             }
 
             if (_currentLoc.directions.up != "")
             {
-                buttons[3].onClick.AddListener(() => ToLocation(_currentLoc.directions.up, buttons[3]));
+                buttons[3].onClick.AddListener(() => ToLocation(_currentLoc.directions.up));
                 buttons[3].gameObject.SetActive(true);
             }
         }
 
-        private void CloseButtons(Image butt)
+        private void CloseButtons()
         {
             buttonGroup.blocksRaycasts = false;
             buttonGroup.interactable = false;
             buttonGroup.DOFade(0, 0.4f).SetEase(Ease.InOutSine);
         }
 
-        private void ToLocation(string locName, Button butt)
+        private void ToLocation(string locName)
         {
-            CloseButtons(butt.GetComponent<Image>());
+            CloseButtons();
 
             var l = locations.ToList().Find(n => n.name == locName);
             if (l == null) return;
-            transitions[0].DOFade(0, _tTime).SetEase(_tEase);
-            transitions[1].sprite = l.capture;
-            transitions[1].DOFade(1, _tTime).SetEase(_tEase);
-            (transitions[0], transitions[1]) = (transitions[1], transitions[0]);
+            
+            _currentLoc.scene.DOFade(0, _tTime).SetEase(_tEase);
+            l.scene.DOFade(1, _tTime).SetEase(_tEase);
 
             _currentLoc = l;
             InitButtons();
@@ -113,7 +110,7 @@ namespace _Project.Scripts.Game.Locations
     [System.Serializable]
     public class LocationData
     {
-        public Sprite capture;
+        public CanvasGroup scene;
         public string name;
         
         [Space(5)] public SwitchDirections directions;
