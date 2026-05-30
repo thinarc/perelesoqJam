@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="DataFile" id="{a05ec349-c199-45c5-9cbb-ccf673bc6cd9}">
+		<property name="assetPath">
+			<value>Ominous 1 Shot/CmA#m Regret.wav.meta</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{9522ad03-76ec-448d-8fdd-e3036d452f50}</destination>
+		</relationship>
+	</object>
+</objects>
