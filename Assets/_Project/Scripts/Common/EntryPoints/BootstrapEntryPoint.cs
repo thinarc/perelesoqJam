@@ -8,11 +8,11 @@ namespace _Project.Scripts.Common.EntryPoints
     {
         private void Start()
         {
-            PlayerPrefs.SetFloat("bg", 1f);
-            PlayerPrefs.SetFloat("sfx", 0.75f);
+            PlayerPrefs.SetFloat("volume", 0.6f);
             
             SoundManager.Instance.Initialize();
             
+            DontDestroyOnLoad(this);
             SceneManager.LoadScene(1);
         }
     }

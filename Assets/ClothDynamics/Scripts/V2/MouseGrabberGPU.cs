@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Unity.Collections;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -79,6 +80,10 @@ namespace ClothDynamics
             _cs.SetBuffer(1, "invMasses", _solver._invMasses);
             _cs.SetBuffer(1, "_handle", _handleBuffer);
             _cs.Dispatch(1, 1, 1, 1);
+            
+            var data = new HandleMouse[1];
+            _handleBuffer.GetData(data);
+            if (data[0].m_isGrabbing == 1) Debug.Log("GRABBING");
 
         }
 
