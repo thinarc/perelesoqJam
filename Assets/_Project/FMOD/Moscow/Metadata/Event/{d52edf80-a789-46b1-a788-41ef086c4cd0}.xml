@@ -116,6 +116,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{dcc9e09a-3a51-444d-9970-d0e8855d8f83}">
+		<property name="volume">
+			<value>-18</value>
+		</property>
 		<property name="name">
 			<value>S_Piano_Th</value>
 		</property>
@@ -174,6 +177,7 @@
 		<relationship name="effects">
 			<destination>{89e4eebd-7da9-45c6-98ed-6935f6a52cb7}</destination>
 			<destination>{dfb12e60-be30-4193-9f81-2c94c4c51867}</destination>
+			<destination>{ace42c71-6e15-4faa-a39a-5293923c21a0}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{d47209f2-9db0-4afe-ae32-99f188c3d04f}" />
@@ -190,6 +194,7 @@
 			<destination>{e3b8f8ac-490a-4bcd-92c9-8ab4c38d3e5b}</destination>
 		</relationship>
 	</object>
+	<object class="LoudnessMeter" id="{ace42c71-6e15-4faa-a39a-5293923c21a0}" />
 	<object class="Automator" id="{74754705-097e-4473-b96f-fbc488105a0e}">
 		<property name="nameOfPropertyBeingAutomated">
 			<value>frequencyA</value>
