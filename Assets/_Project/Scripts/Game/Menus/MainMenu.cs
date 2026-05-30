@@ -37,7 +37,7 @@ namespace _Project.Scripts.Game.Menus
             creditsGroup.interactable = false;
             creditsGroup.blocksRaycasts = false;
 
-            volume.value = SoundManager.Instance.Volume;
+            volume.value = SoundManager.Instance.MasterVolume;
             ChooseVolumeHint();
         }
 
@@ -100,28 +100,28 @@ namespace _Project.Scripts.Game.Menus
 
         public void OnVolumeChange()
         {
-            SoundManager.Instance.Volume = volume.value;
+            SoundManager.Instance.MasterVolume = volume.value;
             ChooseVolumeHint();
         }
         
         public void OnVolume()
         {
             if (_pastVolume < 0.2f) _pastVolume = 0.2f;
-            SoundManager.Instance.Volume = _pastVolume;
+            SoundManager.Instance.MasterVolume = _pastVolume;
             ChooseVolumeHint();
             
-            volume.value = SoundManager.Instance.Volume;
+            volume.value = SoundManager.Instance.MasterVolume;
         }
 
         private float _pastVolume;
 
         public void OffVolume()
         {
-            _pastVolume = SoundManager.Instance.Volume;
-            SoundManager.Instance.Volume = 0f;
+            _pastVolume = SoundManager.Instance.MasterVolume;
+            SoundManager.Instance.MasterVolume = 0f;
             ChooseVolumeHint();
             
-            volume.value = SoundManager.Instance.Volume;
+            volume.value = SoundManager.Instance.MasterVolume;
         }
 
         private void ChooseVolumeHint()
