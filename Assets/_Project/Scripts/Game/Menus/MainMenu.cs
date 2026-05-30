@@ -21,7 +21,7 @@ namespace _Project.Scripts.Game.Menus
             _group.interactable = false;
             _group.blocksRaycasts = false;
 
-            volume.value = SoundManager.Instance.Volume;
+            volume.value = SoundManager.Instance.MasterVolume;
             ChooseVolumeHint();
         }
 
@@ -43,7 +43,7 @@ namespace _Project.Scripts.Game.Menus
 
         public void OnVolumeChange()
         {
-            SoundManager.Instance.Volume = volume.value;
+            SoundManager.Instance.MasterVolume = volume.value;
             ChooseVolumeHint();
         }
 
