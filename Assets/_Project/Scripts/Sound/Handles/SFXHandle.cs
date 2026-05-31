@@ -27,6 +27,7 @@ namespace _Project.Scripts.Sound.Handles
     
             _ominous = RuntimeManager.CreateInstance("event:/SFX/Ominous");
                 //_ominous.set3DAttributes(RuntimeUtils.To3DAttributes(Vector3.zero));
+                
             _lightout = RuntimeManager.CreateInstance("event:/SFX/Event/LightOut");
                 
         }
