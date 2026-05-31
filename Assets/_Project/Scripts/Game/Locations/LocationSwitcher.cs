@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -15,49 +17,72 @@ namespace _Project.Scripts.Game.Locations
         [SerializeField] private Button[] buttons;
         
         private CanvasGroup _group;
-
-        private float _tTime;
-        private Ease _tEase;
+        
+        [SerializeField, Space(5)] private Ease tEase = Ease.Linear;
+        [SerializeField] private float tTime = 0.4f;
 
         private LocationData _currentLoc;
+        private bool _initButtons;
+
+        public event Action LampBroken;
 
         private void Start()
         {
             _group = GetComponentInChildren<CanvasGroup>();
             
-            _tEase = Ease.Linear;
-            _tTime = 0.4f;
-            
             _group.DOFade(0, 0);
             _group.interactable = false;
             _group.blocksRaycasts = false;
-        }
-
-        public void StartLocation()
-        {
-            _group.DOFade(1, _tTime).SetEase(_tEase);
-            _group.interactable = true;
-            _group.blocksRaycasts = true;
             
-            locations.ForEach(l => l.scene.DOFade(0, 0));
-            locations[0].scene.DOFade(1, 0);
-            
-            _currentLoc = locations[0];
+            locations.ForEach(l => l.scene.Initialize(this));
             InitButtons();
         }
 
-        private void InitButtons()
+        public async void StartLocation()
         {
-            if (_currentLoc == null) return;
-            if (!_currentLoc.directions.HasDirection()) return;
+            _group.DOFade(1, tTime).SetEase(tEase);
+            _group.interactable = true;
+            _group.blocksRaycasts = true;
             
-            buttonGroup.blocksRaycasts = true;
-            buttonGroup.DOFade(1, 0.4f).SetEase(Ease.InOutSine).OnComplete(() => buttonGroup.interactable = true);
+            locations.ForEach(l => l.scene.HideFlash());
+            locations[0].scene.Show(true);
             
+            _currentLoc = locations[0];
+            InitButtons();
+            
+            await UniTask.Delay(2000);
+            LampBroken?.Invoke();
+        }
+
+        private async void InitButtons()
+        {
             buttons.ForEach(b =>
             {
                 b.onClick.RemoveAllListeners();
                 b.gameObject.SetActive(false);
+            });
+            
+            if (_currentLoc == null) return;
+            
+            buttonGroup.blocksRaycasts = true;
+            buttonGroup.DOFade(1, 0.4f).SetEase(Ease.InOutSine).OnComplete(async () =>
+            {
+                buttonGroup.interactable = true;
+                _initButtons = true;
+                
+                while (true)
+                {
+                    if (_currentLoc.directions.left != "" && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))) ToLocation(_currentLoc.directions.left);
+
+                    if (_currentLoc.directions.right != "" && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))) ToLocation(_currentLoc.directions.right);
+
+                    if (_currentLoc.directions.bottom != "" && (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))) ToLocation(_currentLoc.directions.bottom);
+
+                    if (_currentLoc.directions.up != "" && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))) ToLocation(_currentLoc.directions.up);
+                
+                    await UniTask.Yield();
+                    if (!_initButtons) break;
+                }
             });
             
             if (_currentLoc.directions.left != "")
@@ -90,40 +115,39 @@ namespace _Project.Scripts.Game.Locations
             buttonGroup.blocksRaycasts = false;
             buttonGroup.interactable = false;
             buttonGroup.DOFade(0, 0.4f).SetEase(Ease.InOutSine);
+            _initButtons = false;
         }
 
-        private void ToLocation(string locName)
+        private async void ToLocation(string locName)
         {
             CloseButtons();
 
             var l = locations.ToList().Find(n => n.name == locName);
             if (l == null) return;
             
-            _currentLoc.scene.DOFade(0, _tTime).SetEase(_tEase);
-            l.scene.DOFade(1, _tTime).SetEase(_tEase);
+            await _currentLoc.scene.Hide(l.scene.Ease, l.scene.Time);
+            l.scene.Show();
 
             _currentLoc = l;
             InitButtons();
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class LocationData
     {
-        public CanvasGroup scene;
+        public BaseScene scene;
         public string name;
         
         [Space(5)] public SwitchDirections directions;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class SwitchDirections
     {
         public string left = "";
         public string right = "";
         public string bottom = "";
         public string up = "";
-        
-        public bool HasDirection() => left != "" ||  right != "" || bottom != "" || up != "";
     }
 }

@@ -24,6 +24,7 @@ namespace _Project.Scripts.Game.Menus
         private CanvasGroup _group;
         private bool _open;
         private bool _started;
+        private bool _credits;
         
         private void Start()
         {
@@ -41,9 +42,18 @@ namespace _Project.Scripts.Game.Menus
             ChooseVolumeHint();
         }
 
+        private float _quitTime = 2f;
+
         private void Update()
         {
-            if (_started && !_open && Input.GetKeyUp(KeyCode.Escape)) ShowMenu(true);
+            if (!_started && _open && !_credits && Input.GetKeyDown(KeyCode.Space)) CloseMenu();
+            
+            if (_open && Input.GetKey(KeyCode.Escape)) _quitTime -= Time.deltaTime;
+            else _quitTime = Mathf.Clamp(_quitTime + Time.deltaTime, 1f, 2f);
+            
+            if (_quitTime < 0f) QuitGame();
+            
+            if (_started && !_open && Input.GetKeyDown(KeyCode.Escape)) ShowMenu(true);
             else if (_started && _open && Input.GetKeyUp(KeyCode.Escape)) CloseMenu(true);
         }
 
@@ -87,6 +97,7 @@ namespace _Project.Scripts.Game.Menus
             creditsGroup.interactable = true;
             creditsGroup.blocksRaycasts = true;
             headerText.text = "Мы";
+            _credits = true;
         }
 
         public void CloseCredits()
@@ -96,6 +107,7 @@ namespace _Project.Scripts.Game.Menus
             creditsGroup.interactable = false;
             creditsGroup.blocksRaycasts = false;
             headerText.text = "Напротив";
+            _credits = false;
         }
 
         public void OnVolumeChange()
