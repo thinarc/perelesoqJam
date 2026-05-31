@@ -14,6 +14,7 @@ namespace _Project.Scripts.Sound.Handles
         private EventInstance _caution;
         private EventInstance _regret;
         private EventInstance _ominous;
+        private EventInstance _lightout;
 
         public void Initialize()
             // create a live copy for event to control it
@@ -26,11 +27,16 @@ namespace _Project.Scripts.Sound.Handles
     
             _ominous = RuntimeManager.CreateInstance("event:/SFX/Ominous");
                 //_ominous.set3DAttributes(RuntimeUtils.To3DAttributes(Vector3.zero));
+            _lightout = RuntimeManager.CreateInstance("event:/SFX/Event/LightOut");
+                
         }
 
         
         // external buttons
         //Just like play&stop
+        
+        
+        // CAUTION
         public void PlayCaution()
         {
             _caution.start();
@@ -41,6 +47,7 @@ namespace _Project.Scripts.Sound.Handles
             _caution.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
         
+        // REGRET
         public void PlayRegret()
         {
             _regret.start();
@@ -50,6 +57,8 @@ namespace _Project.Scripts.Sound.Handles
         {
             _regret.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         } 
+        
+        // OMINOUS
         public void PlayOminous()
         {
             _ominous.start();
@@ -59,6 +68,18 @@ namespace _Project.Scripts.Sound.Handles
         {
             _ominous.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
+        
+        // LIGHT OUT - звук перегорания лампы
+        public void PlayLightOut()
+        {
+            _lightout.start();
+        }
+
+        public void StopLightOut()
+        {
+            _lightout.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+        
          
         
         // im setting all parametrs here
