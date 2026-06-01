@@ -129,11 +129,20 @@ namespace _Project.Scripts.Sound
             MasterVolume = PlayerPrefs.GetFloat("Master", 0.6f);
             
             
-            
+            // I set ALL HANDLE here
             MusicHandle.Initialize();
             SFXHandle.Initialize();
             AmbientHandle.Initialize();
             UIHandle.Initialize();
+            
+            // I set background music there
+            MusicHandle.PlayPianoTheme();
+            
+            
+            // сбросить на нормальные значения после инициализации
+            MusicHandle.SetLowPass(1f);
+            MusicHandle.SetVolume(1f);
+
         }
     }
 }

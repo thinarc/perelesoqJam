@@ -70,9 +70,13 @@ namespace _Project.Scripts.Sound.Handles
         // im setting all parametrs here
         public void SetLowPass(float value)
         {
-            _currentTrack.setParameterByName("LowPass", value);
+            _currentTrack.setParameterByName("LowPass", value, false);
         }
-        
+
+        public void SetVolume(float value)
+        {
+            _currentTrack.setParameterByName("Volume", value, false);
+        }
     }
     
     

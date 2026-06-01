@@ -120,6 +120,10 @@ namespace _Project.Scripts.Game.Locations
 
         private async void ToLocation(string locName)
         {
+
+            // add a sound here
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Scroll");
+
             CloseButtons();
 
             var l = locations.ToList().Find(n => n.name == locName);

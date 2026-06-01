@@ -30,7 +30,7 @@ namespace _Project.Scripts.Game.Locations
             _light.intensity = 0;
         }
 
-        public void Show(bool flash = false)
+        public virtual void Show(bool flash = false)
         {
             if (flash) _group.DOFade(1, 0);
             else _group.DOFade(1, tTime).SetEase(tEase);
@@ -38,7 +38,7 @@ namespace _Project.Scripts.Game.Locations
 
         public void HideFlash() => _group.DOFade(0, 0);
         
-        public async UniTask Hide(Ease ease, float time)
+        public virtual async UniTask Hide(Ease ease, float time)
         {
             _group.DOFade(0, time).SetEase(ease);
             await UniTask.Delay(TimeSpan.FromSeconds(tTime / 2));
