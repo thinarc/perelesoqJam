@@ -47,14 +47,18 @@ namespace _Project.Scripts.Game.Menus
         private void Update()
         {
             if (!_started && _open && !_credits && Input.GetKeyDown(KeyCode.Space)) CloseMenu();
-            
-            if (_open && Input.GetKey(KeyCode.Escape)) _quitTime -= Time.deltaTime;
-            else _quitTime = Mathf.Clamp(_quitTime + Time.deltaTime, 1f, 2f);
-            
-            if (_quitTime < 0f) QuitGame();
+            else if (_credits && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))) CloseCredits();
             
             if (_started && !_open && Input.GetKeyDown(KeyCode.Escape)) ShowMenu(true);
-            else if (_started && _open && Input.GetKeyUp(KeyCode.Escape)) CloseMenu(true);
+            else if (_started && _open && Input.GetKeyDown(KeyCode.Escape)) CloseMenu(true);
+
+            if (_open && Input.GetKey(KeyCode.LeftArrow)) volume.value -= Time.unscaledDeltaTime * 0.8f;
+            else if (_open && Input.GetKey(KeyCode.RightArrow)) volume.value += Time.unscaledDeltaTime * 0.8f;
+            
+            if (_open && Input.GetKey(KeyCode.Escape)) _quitTime -= Time.unscaledDeltaTime;
+            else _quitTime = Mathf.Clamp(_quitTime + Time.unscaledDeltaTime, 1f, 2f);
+            
+            if (_quitTime < 0f) QuitGame();
         }
 
         public void ShowMenu(bool pause = false)

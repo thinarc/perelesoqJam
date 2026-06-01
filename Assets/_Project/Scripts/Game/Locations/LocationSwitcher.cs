@@ -25,6 +25,7 @@ namespace _Project.Scripts.Game.Locations
         private bool _initButtons;
 
         public event Action LampBroken;
+        public event Action DoorAnomaly;
 
         private void Start()
         {
@@ -44,7 +45,7 @@ namespace _Project.Scripts.Game.Locations
             _group.interactable = true;
             _group.blocksRaycasts = true;
             
-            locations.ForEach(l => l.scene.HideFlash());
+            locations.ForEach(l => l.scene.InitialHide());
             locations[0].scene.Show(true);
             
             _currentLoc = locations[0];

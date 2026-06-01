@@ -8,8 +8,8 @@ namespace _Project.Scripts.Game.Locations
 {
     public abstract class BaseScene : MonoBehaviour
     {
-        private CanvasGroup _group;
-        private Light2D _light;
+        protected CanvasGroup Group;
+        protected Light2D Light;
         
         [SerializeField] private Ease tEase = Ease.Linear;
         [SerializeField] private float tTime = 0.4f;
@@ -17,30 +17,41 @@ namespace _Project.Scripts.Game.Locations
         public Ease Ease => tEase;
         public float Time => tTime;
         
-        private float _initialLight;
+        protected float InitialLight;
+        
+        protected bool OpenToAnim;
 
         public virtual void Initialize(LocationSwitcher switcher)
         {
-            _group = GetComponent<CanvasGroup>();
-            _light = GetComponentInChildren<Light2D>();
+            Group = GetComponent<CanvasGroup>();
+            Light = GetComponentInChildren<Light2D>();
             
             gameObject.SetActive(true);
             
-            _initialLight = _light.intensity;
-            _light.intensity = 0;
+            InitialLight = Light.intensity;
+            Light.intensity = 0;
         }
 
-        public void Show(bool flash = false)
+        public virtual void Show(bool flash = false)
         {
-            if (flash) _group.DOFade(1, 0);
-            else _group.DOFade(1, tTime).SetEase(tEase);
-        }
-
-        public void HideFlash() => _group.DOFade(0, 0);
+            if (flash) Group.DOFade(1, 0);
+            else Group.DOFade(1, tTime).SetEase(tEase);
+            OpenToAnim = true;
+        } 
         
-        public async UniTask Hide(Ease ease, float time)
+        public void Show(Ease ease, float time)
         {
-            _group.DOFade(0, time).SetEase(ease);
+            Group.DOFade(1, time).SetEase(ease);
+            OpenToAnim = true;
+        } 
+
+        public void InitialHide() => Group.DOFade(0, 0);
+        
+        public virtual async UniTask Hide(Ease ease, float time)
+        {
+            Group.DOFade(0, time).SetEase(ease);
+            OpenToAnim = true;
+            
             await UniTask.Delay(TimeSpan.FromSeconds(tTime / 2));
         }
     }
