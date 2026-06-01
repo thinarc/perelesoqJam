@@ -1,22 +1,26 @@
-using ClothDynamics;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Project.Scripts.Curtain
 {
     public class DraggableCurtain : MonoBehaviour
     {
-        [SerializeField] private ClothObjectGPU cloth;
-        [SerializeField] private Transform attachParent;
-
-        [SerializeField] private Color curtainColor = Color.white;
+        private CanvasGroup _group;
 
         private void Start()
         {
-            var attached = new Transform[attachParent.childCount];
-            for (var i = 0; i < attachParent.childCount; i++) attached[i] = attachParent.GetChild(i);
+            _group = GetComponent<CanvasGroup>();
+            _group.DOFade(0, 0);
+        }
 
-            cloth._attachedObjects = attached;
-            cloth.GetComponent<MeshRenderer>().material.color = curtainColor;
+        public void Show(Ease ease, float time)
+        {
+            _group.DOFade(1, time).SetEase(ease);
+        }
+
+        public void Hide(Ease ease, float time)
+        {
+            _group.DOFade(0, time).SetEase(ease);
         }
     }
 }

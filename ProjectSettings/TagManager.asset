@@ -45,5 +45,11 @@ TagManager:
   - name: Canvas
     uniqueID: 3989402577
     locked: 0
+  - name: curtain
+    uniqueID: 4243969041
+    locked: 0
+  - name: buttons
+    uniqueID: 1541673641
+    locked: 0
   m_RenderingLayers:
   - Default

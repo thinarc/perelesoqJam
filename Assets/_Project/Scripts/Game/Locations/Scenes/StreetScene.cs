@@ -41,7 +41,7 @@ namespace _Project.Scripts.Game.Locations.Scenes
             Group.DOFade(0, time).SetEase(ease);
             OpenToAnim = true;
             
-            await UniTask.Delay(TimeSpan.FromSeconds(time / 2f));
+            await UniTask.Delay(TimeSpan.FromSeconds(time / 3f));
         }
     }
 }
