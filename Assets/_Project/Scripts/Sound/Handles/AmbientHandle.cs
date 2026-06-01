@@ -15,7 +15,7 @@ namespace _Project.Scripts.Sound.Handles
         private EventInstance _rumble;
         
         // save the link what is current track
-        private EventInstance _currentAmbient;
+        private EventInstance _currentTrack;
 
         public void Initialize()
         // create a live copy for event to control it
@@ -45,33 +45,37 @@ namespace _Project.Scripts.Sound.Handles
         //Lets stop the music
         public void StopAmbient()
         {
-            _currentAmbient.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            _currentTrack.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             _deaf.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
 
         public void PauseAmbient()
         {
-            _currentAmbient.setPaused(true);
+            _currentTrack.setPaused(true);
         }
 
         public void ResumeAmbient()
         {
-            _currentAmbient.setPaused(false);
+            _currentTrack.setPaused(false);
         }
 
         private void SwitchTo(EventInstance newTrack)
         // check: does a current track exist?
         {
-            if (_currentAmbient.isValid())
-                _currentAmbient.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            _currentAmbient = newTrack;
-            _currentAmbient.start();
+            if (_currentTrack.isValid())
+                _currentTrack.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            _currentTrack = newTrack;
+            _currentTrack.start();
         }
         
         // im setting all parametrs here
         public void SetLowPass(float value)
         {
-            _currentAmbient.setParameterByName("LowPass", value);
+            _currentTrack.setParameterByName("LowPass", value, false);
+        }
+        public void SetVolume(float value)
+        {
+            _currentTrack.setParameterByName("Volume", value,  false);
         }
         
     }

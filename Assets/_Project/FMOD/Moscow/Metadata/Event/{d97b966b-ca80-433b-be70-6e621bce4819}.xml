@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{d97b966b-ca80-433b-be70-6e621bce4819}">
+		<property name="note">
+			<value>-3дб
+-9
+</value>
+		</property>
 		<property name="name">
 			<value>Scroll</value>
 		</property>
@@ -105,7 +110,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{9952bd19-d3c0-4547-b84b-5b973934ae8f}">
 		<property name="volume">
-			<value>-3</value>
+			<value>-17</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -157,6 +162,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{ac4cbe05-a037-47bb-9d79-c1a5cea08775}">
+		<property name="volume">
+			<value>-3.5</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{60bf652c-d5ac-4c53-949f-929bb9fc62f4}</destination>
 		</relationship>
