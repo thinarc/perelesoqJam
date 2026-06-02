@@ -34,11 +34,11 @@ namespace _Project.Scripts.Game.Locations.Scenes
 
             streetScene.gameObject.SetActive(true);
 
-            await UniTask.Delay(80);
+            await UniTask.Delay(70);
 
             curtain.Show(Ease, Time / 1.21f);
 
-            await UniTask.Delay(120);
+            await UniTask.Delay(100);
 
             streetScene.yaWindow = true;
             streetScene.Show(Ease, Time * 1.02f);
@@ -51,12 +51,12 @@ namespace _Project.Scripts.Game.Locations.Scenes
             float curtainTime = time * 0.7f;
 
             // 2. начинаем гасить улицу (без ожидания curtain)
-            var streetTask = ((StreetScene)streetScene).Hide(ease, streetTime / 1.72f, true);
+            var streetTask = ((StreetScene)streetScene).Hide(ease, streetTime / 1.76f, true);
             streetScene.yaWindow = false;
 
             // 3. параллельно можно начинать закрытие curtain с небольшой задержкой
             await UniTask.Delay(TimeSpan.FromSeconds(time * 0.16f));
-            curtain.Hide(ease, curtainTime * 1.12f);
+            curtain.Hide(ease, curtainTime * 1.2f);
 
             // 4. ждём завершения улицы (главный слой)
             await streetTask;

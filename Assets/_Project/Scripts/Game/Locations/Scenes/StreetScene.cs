@@ -74,9 +74,9 @@ namespace _Project.Scripts.Game.Locations.Scenes
             
             if (!inWindow) await UniTask.Delay(TimeSpan.FromSeconds(0.07f));
             
-            curtain.Hide(ease, time, true);
+            curtain.Hide(ease, time, true, inWindow);
             
-            await UniTask.Delay(TimeSpan.FromSeconds(time / 1.8f));
+            await UniTask.Delay(TimeSpan.FromSeconds(time / 1.7f));
         }
     }
 }

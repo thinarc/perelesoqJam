@@ -63,12 +63,15 @@ namespace _Project.Scripts.Curtain
             }
         }
 
-        public async void Hide(Ease ease, float time, bool fromStreet = false)
+        public async void Hide(Ease ease, float time, bool fromStreet = false, bool fromStreetInWindow = false)
         {
-            time /= 1.3f;
+            if (!fromStreetInWindow)
+            {
+                time /= 1.3f;
             
-            _group.blocksRaycasts = false;
-            await _group.DOFade(0, time).SetEase(ease).AsyncWaitForCompletion();
+                _group.blocksRaycasts = false;
+                await _group.DOFade(0, time).SetEase(ease).AsyncWaitForCompletion();
+            }
             
             if (fromStreet)
             {
