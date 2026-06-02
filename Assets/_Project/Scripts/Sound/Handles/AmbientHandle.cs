@@ -13,6 +13,7 @@ namespace _Project.Scripts.Sound.Handles
     {
         private EventInstance _deaf;
         private EventInstance _rumble;
+        private EventInstance _street;
         
         // save the link what is current track
         private EventInstance _currentTrack;
@@ -22,6 +23,7 @@ namespace _Project.Scripts.Sound.Handles
         {
             _deaf = RuntimeManager.CreateInstance("event:/bg/Deaf");
             _rumble = RuntimeManager.CreateInstance("event:/bg/Rumble");
+            _street = RuntimeManager.CreateInstance("event:/bg/Street");
         }
 
         
@@ -41,7 +43,18 @@ namespace _Project.Scripts.Sound.Handles
             _deaf.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
         
-        
+        // Street Play&Stop
+        public void PlayStreet()
+        {
+            SwitchTo(_street);
+        }
+
+        public void StopStreet()
+        {
+            _street.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+
+
         //Lets stop the music
         public void StopAmbient()
         {

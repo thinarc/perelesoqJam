@@ -1,3 +1,4 @@
+using _Project.Scripts.Sound;
 using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -24,6 +25,13 @@ namespace _Project.Scripts.Game.Locations.Scenes
         public override async void Show(bool flash = false)
         {
             base.Show(flash);
+            // bring down music here
+            SoundManager.Instance.MusicHandle.SetLowPass(0.0f);
+            SoundManager.Instance.MusicHandle.SetVolume(0.3f);
+            
+            // Play streets sound
+            SoundManager.Instance.AmbientHandle.PlayStreet();
+            
 
             while (true)
             {
@@ -40,6 +48,10 @@ namespace _Project.Scripts.Game.Locations.Scenes
         {
             Group.DOFade(0, time).SetEase(ease);
             OpenToAnim = true;
+            // Take back music parameters
+            SoundManager.Instance.MusicHandle.SetLowPass(1f);
+            SoundManager.Instance.MusicHandle.SetVolume(1f);
+            SoundManager.Instance.AmbientHandle.StopStreet();
             
             await UniTask.Delay(TimeSpan.FromSeconds(time / 2f));
         }
