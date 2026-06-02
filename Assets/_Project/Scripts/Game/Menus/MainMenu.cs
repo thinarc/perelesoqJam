@@ -20,6 +20,7 @@ namespace _Project.Scripts.Game.Menus
         [SerializeField] private ParticleSystem rain;
         
         [SerializeField, Space(5)] private TextMeshProUGUI headerText;
+        [SerializeField] private GameObject creditsCol;
         
         private CanvasGroup _group;
         private bool _open;
@@ -102,6 +103,7 @@ namespace _Project.Scripts.Game.Menus
             creditsGroup.blocksRaycasts = true;
             headerText.text = "Мы";
             _credits = true;
+            creditsCol.SetActive(true);
         }
 
         public void CloseCredits()
@@ -112,6 +114,7 @@ namespace _Project.Scripts.Game.Menus
             creditsGroup.blocksRaycasts = false;
             headerText.text = "Напротив";
             _credits = false;
+            creditsCol.SetActive(false);
         }
 
         public void OnVolumeChange()

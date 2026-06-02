@@ -10,6 +10,7 @@ namespace _Project.Scripts.Common.EntryPoints
         {
 #if !UNITY_EDITOR
             Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
 #endif
             SoundManager.Instance.Initialize();
             

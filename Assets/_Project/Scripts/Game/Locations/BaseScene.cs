@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.Curtain;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -20,6 +21,8 @@ namespace _Project.Scripts.Game.Locations
         protected float InitialLight;
         
         protected bool OpenToAnim;
+        
+        public bool yaWindow;
 
         public virtual void Initialize(LocationSwitcher switcher)
         {
@@ -43,7 +46,40 @@ namespace _Project.Scripts.Game.Locations
         {
             Group.DOFade(1, time).SetEase(ease);
             OpenToAnim = true;
-        } 
+        }
+
+        private bool _lightToClose;
+
+        [SerializeField, Space(5)] private bool streetLight;
+
+        public virtual async void UpdateLight(bool close = false)
+        {
+            _lightToClose = close;
+
+            if (!close && streetLight)
+            {
+                Light.intensity = 0;
+                await UniTask.Delay(100);
+            }
+            
+            while (true)
+            {
+                var target = InitialLight;
+                var ev = 12f;
+
+                if (close || (!streetLight && !DraggableCurtain.Instance.Open))
+                {
+                    target = 0;
+                    ev = 20f;
+                }
+
+                if (streetLight) ev *= 0.2f;
+                
+                Light.intensity = Mathf.MoveTowards(Light.intensity, target, UnityEngine.Time.deltaTime * ev);
+                await UniTask.Yield();
+                if (Mathf.Approximately(Light.intensity, target) || _lightToClose != close) break;
+            }
+        }
 
         public void InitialHide() => Group.DOFade(0, 0);
         

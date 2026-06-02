@@ -2,6 +2,7 @@ using _Project.Scripts.Sound;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Project.Scripts.Curtain;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.Utilities;
@@ -40,6 +41,11 @@ namespace _Project.Scripts.Game.Locations
             InitButtons();
         }
 
+        private void Update()
+        {
+            buttons[3].interactable = DraggableCurtain.Instance.Open;
+        }
+
         public async void StartLocation()
         {
             _group.DOFade(1, tTime).SetEase(tEase);
@@ -48,12 +54,13 @@ namespace _Project.Scripts.Game.Locations
             
             locations.ForEach(l => l.scene.InitialHide());
             locations[0].scene.Show(true);
+            locations[0].scene.UpdateLight();
             
             _currentLoc = locations[0];
             InitButtons();
             
-            await UniTask.Delay(2000);
-            LampBroken?.Invoke();
+            // await UniTask.Delay(2000);
+            // LampBroken?.Invoke();
         }
 
         private async void InitButtons()
@@ -80,7 +87,8 @@ namespace _Project.Scripts.Game.Locations
 
                     if (_currentLoc.directions.bottom != "" && (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))) ToLocation(_currentLoc.directions.bottom);
 
-                    if (_currentLoc.directions.up != "" && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))) ToLocation(_currentLoc.directions.up);
+                    if (DraggableCurtain.Instance.Open && _currentLoc.directions.up != "" && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
+                        ToLocation(_currentLoc.directions.up);
                 
                     await UniTask.Yield();
                     if (!_initButtons) break;
@@ -130,8 +138,10 @@ namespace _Project.Scripts.Game.Locations
             var l = locations.ToList().Find(n => n.name == locName);
             if (l == null) return;
             
+            _currentLoc.scene.UpdateLight(true);
             await _currentLoc.scene.Hide(l.scene.Ease, l.scene.Time);
             l.scene.Show();
+            l.scene.UpdateLight();
 
             _currentLoc = l;
             InitButtons();

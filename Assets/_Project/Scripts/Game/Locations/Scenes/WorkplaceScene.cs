@@ -1,6 +1,7 @@
 using _Project.Scripts.Sound;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.Game.Locations.Scenes
@@ -8,12 +9,29 @@ namespace _Project.Scripts.Game.Locations.Scenes
     public class WorkplaceScene : BaseScene
     {
         [SerializeField, Space(5)] private Image picture;
-        [SerializeField] private Sprite darkplace;
+        [SerializeField] private Light2D lamp;
+        [SerializeField] private Light2D origLight;
         
-        public override void Initialize(LocationSwitcher switcher)
+        public override async void Initialize(LocationSwitcher switcher)
         {
             base.Initialize(switcher);
             switcher.LampBroken += OnLampBroken;
+            
+            // Group = GetComponent<CanvasGroup>();
+            // origLight.gameObject.SetActive(false);
+            // lamp.gameObject.SetActive(true);
+            // Light = lamp;
+            //
+            // gameObject.SetActive(true);
+            //
+            // InitialLight = Light.intensity;
+            // Light.intensity = 0;
+            // while (true)
+            // {
+            //     Light.intensity = Mathf.MoveTowards(Light.intensity, InitialLight, UnityEngine.Time.deltaTime * 0.5f);
+            //     await UniTask.Yield();
+            //     if (Mathf.Approximately(Light.intensity, InitialLight)) break;
+            // }
         }
 
         private async void OnLampBroken()
@@ -53,8 +71,11 @@ namespace _Project.Scripts.Game.Locations.Scenes
             Light.intensity = InitialLight;
             await UniTask.Delay(40);
             Light.intensity = 0;
-
-            picture.sprite = darkplace;
+            
+            Light = origLight;
+            InitialLight = Light.intensity;
+            origLight.intensity = 0;
+            origLight.gameObject.SetActive(true);
         }
     }
 }

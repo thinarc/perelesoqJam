@@ -1,5 +1,6 @@
 using _Project.Scripts.Sound;
 using System;
+using _Project.Scripts.Curtain;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace _Project.Scripts.Game.Locations.Scenes
         [SerializeField] private Sprite sky2;
 
         [SerializeField, Space(5)] private int skyDelay = 100;
+        [SerializeField] private DraggableCurtain curtain;
         
         private Sprite _sky1;
         
@@ -24,6 +26,8 @@ namespace _Project.Scripts.Game.Locations.Scenes
 
         public override async void Show(bool flash = false)
         {
+            if (!yaWindow) curtain.Show(Ease, Time / 1.6f, true);
+            
             base.Show(flash);
             // bring down music here
             SoundManager.Instance.MusicHandle.SetLowPass(0.2f);
@@ -31,7 +35,6 @@ namespace _Project.Scripts.Game.Locations.Scenes
             
             // Play streets sound
             SoundManager.Instance.AmbientHandle.PlayStreet();
-            
 
             while (true)
             {
@@ -53,7 +56,27 @@ namespace _Project.Scripts.Game.Locations.Scenes
             SoundManager.Instance.MusicHandle.SetVolume(1f);
             SoundManager.Instance.AmbientHandle.StopStreet();
             
-            await UniTask.Delay(TimeSpan.FromSeconds(time / 3f));
+            await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+            
+            curtain.Hide(ease, time, true);
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(time / 1.6f));
+        }
+        
+        public async UniTask Hide(Ease ease, float time, bool inWindow = false)
+        {
+            Group.DOFade(0, time).SetEase(ease);
+            OpenToAnim = true;
+            // Take back music parameters
+            SoundManager.Instance.MusicHandle.SetLowPass(1f);
+            SoundManager.Instance.MusicHandle.SetVolume(1f);
+            SoundManager.Instance.AmbientHandle.StopStreet();
+            
+            if (!inWindow) await UniTask.Delay(TimeSpan.FromSeconds(0.07f));
+            
+            curtain.Hide(ease, time, true);
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(time / 1.8f));
         }
     }
 }
