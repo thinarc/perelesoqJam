@@ -1,3 +1,4 @@
+using _Project.Scripts.Sound;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -122,7 +123,7 @@ namespace _Project.Scripts.Game.Locations
         private async void ToLocation(string locName)
         {
             // add a sound here
-            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Scroll");
+            SoundManager.Instance.UIHandle.PlayScroll();
 
             CloseButtons();
 
