@@ -26,8 +26,8 @@ namespace _Project.Scripts.Game.Locations.Scenes
         {
             base.Show(flash);
             // bring down music here
-            SoundManager.Instance.MusicHandle.SetLowPass(0.0f);
-            SoundManager.Instance.MusicHandle.SetVolume(0.3f);
+            SoundManager.Instance.MusicHandle.SetLowPass(0.2f);
+            SoundManager.Instance.MusicHandle.SetVolume(0.38f);
             
             // Play streets sound
             SoundManager.Instance.AmbientHandle.PlayStreet();
