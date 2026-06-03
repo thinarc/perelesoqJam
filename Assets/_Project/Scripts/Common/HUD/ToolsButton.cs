@@ -12,9 +12,11 @@ namespace _Project.Scripts.Common.HUD
         private bool _hold;
 
         public bool holded = true;
+        public bool yaTool;
         
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (yaTool && EditController.Instance.prepareRotate) return;
             if (!DraggableCurtain.Instance.Open) return;
             _placed = true;
             CursorModeSwitcher.Instance.SetToolMode();
@@ -22,6 +24,7 @@ namespace _Project.Scripts.Common.HUD
         
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (yaTool && EditController.Instance.prepareRotate) return;
             if (!DraggableCurtain.Instance.Open) return;
             CursorModeSwitcher.Instance.SetToolMode();
             _hold = true;

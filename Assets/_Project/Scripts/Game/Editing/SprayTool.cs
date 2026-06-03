@@ -32,6 +32,8 @@ namespace _Project.Scripts.Game.Editing.Photo
                 return;
             
             if (!InPhotoSpawn) return;
+            
+            if (sprayContainer.childCount >= EditController.Instance.targetS * 2f) return;
 
             _timer += Time.deltaTime;
 

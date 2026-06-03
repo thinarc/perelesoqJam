@@ -23,6 +23,9 @@ namespace _Project.Scripts.Game.Editing
         
         private Queue<EditingPhoto> _queue;
 
+        public int targetS;
+        public bool prepareRotate;
+
         private void Awake() => Instance = this;
 
         private async void Start()
@@ -41,16 +44,28 @@ namespace _Project.Scripts.Game.Editing
 
         private async UniTask EditCycle()
         {
+            prepareRotate = false;
+            
             var photo = _queue.Dequeue();
             _spawner.FillPhoto(photo);
             
             var targetS = Random.Range(minTargetShine, maxTargetShine);
+            this.targetS = targetS;
 
-            var d = dust.childCount;
-            var r = dirt.childCount;
-            var s = shine.childCount;
+            while (true)
+            {
+                var d = dust.childCount;
+                var r = dirt.childCount;
+                var s = shine.childCount;
+                
+                var completeClean = d == 0 && r == 0 && s == targetS;
+                
+                await UniTask.Yield();
+                if (completeClean) break;
+            }
             
-            // bool complete = d == 0 && r == 0 && 
+            photo.PrepareToRotate();
+            prepareRotate = true;
         }
         
         public enum ToolType

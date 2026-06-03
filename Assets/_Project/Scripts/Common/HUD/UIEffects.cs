@@ -188,11 +188,21 @@ public class UIEffects : MonoBehaviour,
     }
 
     public bool photo;
+    public bool photoToRotate;
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (ToolPickup.ToolInHand && !photo) return;
-        if (photo && !ToolPickup.ToolInHand) return;
+        if (photo && photoToRotate)
+        {
+            
+        }
+        else
+        {
+            if (ToolPickup.ToolInHand && !photo) return;
+            if (photo && !ToolPickup.ToolInHand) return;
+        }
+        
         hovering = true;
 
         if (photo)
@@ -229,10 +239,21 @@ public class UIEffects : MonoBehaviour,
         }
     }
 
+    public bool yaTool;
+
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (ToolPickup.ToolInHand && !photo) return;
-        if (photo && !ToolPickup.ToolInHand) return;
+        if (yaTool && EditController.Instance.prepareRotate) return;
+        
+        if (photoToRotate && !photo)
+        {
+            GetComponent<EditingPhoto>().RotatePhoto();
+        }
+        else
+        {
+            if (ToolPickup.ToolInHand && !photo) return;
+            if (photo && !ToolPickup.ToolInHand) return;
+        }
         
         if (!Has(UIEffectType.PressScale))
             return;

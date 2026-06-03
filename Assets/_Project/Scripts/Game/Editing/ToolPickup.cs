@@ -47,6 +47,7 @@ namespace _Project.Scripts.Game.Editing
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (EditController.Instance.prepareRotate) return;
             EditController.Instance.currentTool = toolType;
             ToolInHand = true;
             PickUp();
