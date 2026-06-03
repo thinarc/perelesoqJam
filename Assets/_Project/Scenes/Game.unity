@@ -879,6 +879,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -1076,6 +1077,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 1
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -1948,7 +1950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIEffects
   effects: 15
-  hoverScale: 1.05
+  hoverScale: 1.03
   pressScale: 1
   scaleDuration: 0.15
   tiltAmount: 8
@@ -1962,6 +1964,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 1
   yaActiveList: 0
@@ -2633,6 +2636,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -3151,6 +3155,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -3303,6 +3308,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -3903,6 +3909,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 1
   yaInactiveList: 0
   yaActiveList: 0
@@ -4066,6 +4073,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -4282,6 +4290,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 1
   yaInactiveList: 0
   yaActiveList: 0
@@ -4572,6 +4581,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -5427,6 +5437,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -5715,6 +5726,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 1
   yaInactiveList: 0
   yaActiveList: 0
@@ -6435,6 +6447,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -6682,6 +6695,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 1
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -7690,6 +7704,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -12890,7 +12905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIEffects
   effects: 13
-  hoverScale: 1.1
+  hoverScale: 1.08
   pressScale: 0.9
   scaleDuration: 0.15
   tiltAmount: -8
@@ -12904,6 +12919,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -19262,6 +19278,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -19927,6 +19944,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -20091,6 +20109,7 @@ MonoBehaviour:
   wobbleDuration: 0.08
   photo: 0
   photoToRotate: 0
+  onAnotherAnim: 0
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
@@ -21328,6 +21347,7 @@ MonoBehaviour:
   waitChoose: 0
   waitCrossLine: 0
   rejectPhoto: 0
+  listEffects: {fileID: 225508716}
 --- !u!114 &2127566977
 MonoBehaviour:
   m_ObjectHideFlags: 0

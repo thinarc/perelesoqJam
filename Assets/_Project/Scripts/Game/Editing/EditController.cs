@@ -88,9 +88,9 @@ namespace _Project.Scripts.Game.Editing
 
         public async void ShowButtons()
         {
-            await UniTask.Delay(800);
+            await UniTask.Delay(1400);
 
-            buttonGroup.DOFade(1, 0.4f).SetEase(Ease.OutBack);
+            buttonGroup.DOFade(1, 0.4f).SetEase(Ease.InBack);
             await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
             buttonGroup.interactable = true;
             buttonGroup.blocksRaycasts = true;
@@ -157,49 +157,41 @@ namespace _Project.Scripts.Game.Editing
             {
                 waitChoose = false;
                 rejectPhoto = false;
-
-                photo.transform.DORotate(new Vector3(0f, 0f, 15f), 0.15f);
-                
                 CloseButtons();
 
-                await photo.GetComponent<RectTransform>().DOAnchorPosX(photo.GetComponent<RectTransform>().anchoredPosition.x + 100, 1f).SetEase(Ease.InBack).AsyncWaitForCompletion();
-                
+                photo.GetComponent<UIEffects>().onAnotherAnim = true;
+                photo.transform.DORotate(new Vector3(0f, 0f, 15f), 0.15f);
+
+                await photo.GetComponent<RectTransform>().DOAnchorPosX(photo.GetComponent<RectTransform>().anchoredPosition.x + 50, 0.9f).SetEase(Ease.InBack).AsyncWaitForCompletion();
                 await photo.GetComponent<Image>().DOFade(0, 0.3f).SetEase(Ease.InBack).AsyncWaitForCompletion();
 
+                photo.GetComponent<UIEffects>().onAnotherAnim = false;
                 photo.gameObject.SetActive(false);
             });
             
             rejectButton.onClick.AddListener(async () =>
             {
-                var rectTransform = photo.GetComponent<RectTransform>();
+                CloseButtons();
+                
                 var image = photo.GetComponent<Image>();
 
                 var direction = Random.value > 0.5f ? -1f : 1f;
                 
-                CloseButtons();
+                photo.GetComponent<UIEffects>().onAnotherAnim = true;
 
-                photo.transform.DORotate(
-                    new Vector3(0f, 0f, -15f * direction),
-                    0.15f
-                );
-
-                rectTransform
-                    .DOAnchorPosX(
-                        rectTransform.anchoredPosition.x + 200f * direction,
-                        1f
+                photo.transform
+                    .DORotate(
+                        new Vector3(0f, 0f, 10f * direction),
+                        0.2f
                     )
-                    .SetEase(Ease.InBack);
-
-                await buttonGroup
-                    .DOFade(0, 0.2f)
-                    .SetEase(Ease.InBack)
-                    .AsyncWaitForCompletion();
+                    .SetEase(Ease.OutQuad);
 
                 await image
-                    .DOFade(0, 0.3f)
-                    .SetEase(Ease.InBack)
+                    .DOFade(0f, 0.3f)
+                    .SetEase(Ease.OutQuad)
                     .AsyncWaitForCompletion();
 
+                photo.GetComponent<UIEffects>().onAnotherAnim = false;
                 photo.gameObject.SetActive(false);
                 
                 waitChoose = false;
@@ -218,14 +210,13 @@ namespace _Project.Scripts.Game.Editing
                     l.GetComponent<UIEffects>().yaActiveList = true;
                 
                     waitCrossLine = true;
+                    await UniTask.Delay(800);
                     listEffects.OnPointerEnter(null);
+                    await UniTask.Delay(180);
+                    listEffects.OnPointerExit(null);
                     await UniTask.WaitUntil(() => !waitCrossLine);
                 }
-                else
-                {
-                    PhotoToLastQueue(photo);
-                    print("you reject right photo");
-                }
+                else PhotoToLastQueue(photo);
             }
             else
             {

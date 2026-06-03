@@ -212,9 +212,12 @@ public class UIEffects : MonoBehaviour,
                 .SetUpdate(true);
         }
     }
+    
+    public bool onAnotherAnim;
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (onAnotherAnim) return;
         hovering = false;
         
         if (photo)
