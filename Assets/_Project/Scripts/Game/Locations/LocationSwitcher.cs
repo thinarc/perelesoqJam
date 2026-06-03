@@ -19,9 +19,6 @@ namespace _Project.Scripts.Game.Locations
         [SerializeField] private Button[] buttons;
         
         private CanvasGroup _group;
-        
-        [SerializeField, Space(5)] private Ease tEase = Ease.Linear;
-        [SerializeField] private float tTime = 0.4f;
 
         private LocationData _currentLoc;
         private bool _initButtons;
@@ -44,11 +41,12 @@ namespace _Project.Scripts.Game.Locations
         private void Update()
         {
             buttons[3].interactable = DraggableCurtain.Instance.Open;
+            buttons[4].interactable = DraggableCurtain.Instance.Open;
         }
 
-        public async void StartLocation()
+        public void StartLocation()
         {
-            _group.DOFade(1, tTime).SetEase(tEase);
+            _group.DOFade(1, 0.4f).SetEase(Ease.Linear);
             _group.interactable = true;
             _group.blocksRaycasts = true;
             
@@ -63,7 +61,7 @@ namespace _Project.Scripts.Game.Locations
             // LampBroken?.Invoke();
         }
 
-        private async void InitButtons()
+        private void InitButtons()
         {
             buttons.ForEach(b =>
             {
@@ -89,6 +87,9 @@ namespace _Project.Scripts.Game.Locations
 
                     if (DraggableCurtain.Instance.Open && _currentLoc.directions.up != "" && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
                         ToLocation(_currentLoc.directions.up);
+                    
+                    if (DraggableCurtain.Instance.Open && _currentLoc.directions.things != "" && (Input.GetKeyDown(KeyCode.E)))
+                        ToLocation(_currentLoc.directions.things);
                 
                     await UniTask.Yield();
                     if (!_initButtons) break;
@@ -117,6 +118,12 @@ namespace _Project.Scripts.Game.Locations
             {
                 buttons[3].onClick.AddListener(() => ToLocation(_currentLoc.directions.up));
                 buttons[3].gameObject.SetActive(true);
+            }
+
+            if (_currentLoc.directions.things != "")
+            {
+                buttons[4].onClick.AddListener(() => ToLocation(_currentLoc.directions.things));
+                buttons[4].gameObject.SetActive(true);
             }
         }
 
@@ -164,5 +171,6 @@ namespace _Project.Scripts.Game.Locations
         public string right = "";
         public string bottom = "";
         public string up = "";
+        public string things = "";
     }
 }

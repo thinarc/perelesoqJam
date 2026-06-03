@@ -29,7 +29,7 @@ namespace _Project.Scripts.Common.HUD.Cursor
         private void Awake()
         {
             SetState(CursorState.Idle);
-#if !UNITY_EDITOR
+#if UNITY_EDITOR
             GetComponent<CanvasGroup>().alpha = 1;
 #endif
         }

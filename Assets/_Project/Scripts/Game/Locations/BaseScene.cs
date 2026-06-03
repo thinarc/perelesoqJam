@@ -3,6 +3,7 @@ using _Project.Scripts.Curtain;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 
 namespace _Project.Scripts.Game.Locations
@@ -14,6 +15,8 @@ namespace _Project.Scripts.Game.Locations
         
         [SerializeField] private Ease tEase = Ease.Linear;
         [SerializeField] private float tTime = 0.4f;
+
+        [SerializeField, Space(5)] private Image thingsButton;
         
         public Ease Ease => tEase;
         public float Time => tTime;
@@ -40,6 +43,7 @@ namespace _Project.Scripts.Game.Locations
             if (flash) Group.DOFade(1, 0);
             else Group.DOFade(1, tTime).SetEase(tEase);
             OpenToAnim = true;
+            thingsButton?.DOFade(0, 0).OnComplete(() => thingsButton?.DOFade(1, tTime).SetEase(tEase));
         } 
         
         public void Show(Ease ease, float time)
@@ -59,7 +63,7 @@ namespace _Project.Scripts.Game.Locations
             if (!close && streetLight)
             {
                 Light.intensity = 0;
-                await UniTask.Delay(100);
+                await UniTask.Delay(80);
             }
             
             while (true)
@@ -87,7 +91,7 @@ namespace _Project.Scripts.Game.Locations
         {
             Group.DOFade(0, time).SetEase(ease);
             OpenToAnim = true;
-            
+            thingsButton?.DOFade(0, time).SetEase(ease);
             await UniTask.Delay(TimeSpan.FromSeconds(tTime / 2));
         }
     }
