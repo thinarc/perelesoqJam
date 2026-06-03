@@ -70,7 +70,6 @@ namespace _Project.Scripts.Game.Curtain
         public void OnPointerDown(PointerEventData eventData)
         {
             dragging = true;
-            SoundManager.Instance.ActionHandle.PlayCurtain(); // ЗВУК ШТОРЫ ЗДЕСЬ
             CursorModeSwitcher.Instance.SetToolMode();
         }
 
@@ -83,31 +82,32 @@ namespace _Project.Scripts.Game.Curtain
         public void OnPointerUp(PointerEventData eventData)
         {
             dragging = false;
-            SoundManager.Instance.ActionHandle.StopCurtain(); // ВЫКЛЮЧИТЬ ЗВУК ШТОРЫ
+            // Игрок отпустил мышь — гасим звук мгновенно
+            SoundManager.Instance.ActionHandle.StopCurtainImmediate(); 
             if (!Dragging && !Placed) CursorModeSwitcher.Instance.SetDefaultMode();
         }
-
+       
         public void OnDrag(PointerEventData eventData)
         {
-            if (!dragging || !interactable)
-                return;
+            if (!dragging || !interactable) return;
 
             var delta = eventData.delta.x * sensitivity;
 
             if (side == Side.Left)
+                Set(_value - delta);
+            else
+                Set(_value + delta);
+
+            // Если уперлись в края шторы — звук выключаем сразу
+            if (_value <= 0f || _value >= 1f)
             {
-                var current = _value;
-                Set(current - delta);
+                SoundManager.Instance.ActionHandle.StopCurtainImmediate();
             }
             else
             {
-                var current = _value;
-                Set(current + delta);
+                // Мышь двигается внутри допустимых границ — пинаем метод проигрывания
+                SoundManager.Instance.ActionHandle.PlayCurtain();
             }
-            
-            // if curtain reachs a side => stop sound
-            if (_value <= 0f || _value >= 1f)
-                SoundManager.Instance.ActionHandle.StopCurtain();
         }
     }
 }
