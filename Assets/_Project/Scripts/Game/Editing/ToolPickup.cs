@@ -16,6 +16,8 @@ namespace _Project.Scripts.Game.Editing
 
         public static bool ToolInHand;
 
+        public Vector2 pickupOffset;
+
         private void Awake()
         {
             _rect = GetComponent<RectTransform>();
@@ -36,7 +38,7 @@ namespace _Project.Scripts.Game.Editing
                 out var localPoint
             );
 
-            _rect.localPosition = localPoint;
+            _rect.localPosition = localPoint + pickupOffset;
 
             if (Input.GetMouseButtonUp(0))
             {

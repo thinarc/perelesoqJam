@@ -5,7 +5,7 @@ namespace _Project.Scripts.Game.Editing.Photo
     public class SprayTool : MonoBehaviour
     {
         [Header("Setup")]
-        [SerializeField] private RectTransform sprayContainer;
+        private RectTransform _sprayContainer;
         [SerializeField] private GameObject[] sprayPrefabs;
 
         [Header("Settings")]
@@ -18,24 +18,46 @@ namespace _Project.Scripts.Game.Editing.Photo
         
         public Canvas canvas;
 
+        public Vector2 spawnOffset;
+        public ParticleSystem sprayParticles;
+
+        public static SprayTool Instance { get; private set; }
+        private void Awake() => Instance = this;
+
         private void Start()
         {
             InPhotoSpawn = false;
+        }
+        
+        public void UpdateContainer(RectTransform container)
+        {
+            _sprayContainer = container;
         }
 
         private void Update()
         {
             if (EditController.Instance.currentTool != EditController.ToolType.Spray)
+            {
+                sprayParticles.Stop();
                 return;
-
+            }
+            
             if (!Input.GetMouseButton(0))
+            {
+                sprayParticles.Stop();
                 return;
+            }
             
-            if (!InPhotoSpawn) return;
+            if (!InPhotoSpawn)
+            {
+                sprayParticles.Stop();
+                return;
+            }
             
-            if (sprayContainer.childCount >= EditController.Instance.targetS * 2f) return;
+            if (_sprayContainer.childCount >= EditController.Instance.targetS * 2f) return;
 
             _timer += Time.deltaTime;
+            sprayParticles.Play();
 
             if (!(_timer >= spawnInterval)) return;
             _timer = 0f;
@@ -45,7 +67,7 @@ namespace _Project.Scripts.Game.Editing.Photo
         private void SpawnSpot()
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                sprayContainer,
+                _sprayContainer,
                 Input.mousePosition,
                 canvas.worldCamera,
                 out var localPoint
@@ -53,11 +75,11 @@ namespace _Project.Scripts.Game.Editing.Photo
             
             var prefab = sprayPrefabs[Random.Range(0, sprayPrefabs.Length)];
 
-            var obj = Instantiate(prefab, sprayContainer);
+            var obj = Instantiate(prefab, _sprayContainer);
 
             var rt = obj.GetComponent<RectTransform>();
             
-            rt.anchoredPosition = localPoint;
+            rt.anchoredPosition = localPoint + spawnOffset;
 
             var randomScale = Random.Range(scaleRange.x, scaleRange.y);
 

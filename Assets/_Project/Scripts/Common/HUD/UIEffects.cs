@@ -234,9 +234,15 @@ public class UIEffects : MonoBehaviour,
 
     public bool yaTool;
     public bool yaInactiveList;
+    public bool yaActiveList;
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (yaActiveList)
+        {
+            EditController.Instance.CrossOutLine();
+        }
+        
         if (yaTool && EditController.Instance.prepareRotate) return;
         if (yaInactiveList) return;
         

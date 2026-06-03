@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3279797704034099519}
   - component: {fileID: 639589436254403639}
   - component: {fileID: 1365980927999097554}
+  - component: {fileID: -2383946961650891896}
   - component: {fileID: 2705275701949655528}
   m_Layer: 5
   m_Name: s1
@@ -59,6 +60,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Game.Editing.Photo.ShineSpot
   requiredTool: 0000000001000000
+--- !u!114 &-2383946961650891896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253322991996196250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2102a642363246fca6d0d38495405d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIEffects
+  effects: 32
+  hoverScale: 1.1
+  pressScale: 0.9
+  scaleDuration: 0.15
+  tiltAmount: 8
+  moveAmount: 10
+  smoothSpeed: 12
+  floatDistance: 2
+  floatDuration: 1
+  breathingScale: 1.05
+  breathingDuration: 1
+  wobbleAngle: 3
+  wobbleDuration: 0.08
+  photo: 0
+  photoToRotate: 0
+  yaTool: 0
+  yaInactiveList: 0
 --- !u!114 &2705275701949655528
 MonoBehaviour:
   m_ObjectHideFlags: 0
