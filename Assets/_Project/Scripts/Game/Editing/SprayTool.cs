@@ -25,7 +25,7 @@ namespace _Project.Scripts.Game.Editing.Photo
 
         private void Update()
         {
-            if (EditController.Instance.сurrentTool != EditController.ToolType.Spray)
+            if (EditController.Instance.currentTool != EditController.ToolType.Spray)
                 return;
 
             if (!Input.GetMouseButton(0))

@@ -31,7 +31,7 @@ namespace _Project.Scripts.Game.Editing.Photo
                 return;
 
             // if (EditController.Instance.currentTool != requiredTool)
-            if (EditController.Instance.сurrentTool != requiredTool[0] && EditController.Instance.сurrentTool != requiredTool[1])
+            if (EditController.Instance.currentTool != requiredTool[0] && EditController.Instance.currentTool != requiredTool[1])
                 return;
 
             _cleaned = true;

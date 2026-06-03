@@ -29,6 +29,7 @@ namespace _Project.Scripts.Game.Editing
         {
             _spawner = GetComponent<ParticleSpawner>();
             
+            _queue = new Queue<EditingPhoto>();
             GetComponentsInChildren<EditingPhoto>().ToList().ForEach(photo => _queue.Enqueue(photo));
 
             while (true)
@@ -49,7 +50,7 @@ namespace _Project.Scripts.Game.Editing
             var r = dirt.childCount;
             var s = shine.childCount;
             
-            bool complete = d == 0 && r == 0 && 
+            // bool complete = d == 0 && r == 0 && 
         }
         
         public enum ToolType

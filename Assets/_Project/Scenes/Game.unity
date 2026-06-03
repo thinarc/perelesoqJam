@@ -14631,7 +14631,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73bde2a21ed740a38a7dc88bf037d0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Game.Editing.EditController
-  "\u0441urrentTool": 0
+  currentTool: 0
+  minTargetShine: 10
+  maxTargetShine: 15
+  dust: {fileID: 1316313345}
+  dirt: {fileID: 1245549004}
+  shine: {fileID: 1526163579}
 --- !u!114 &2127566977
 MonoBehaviour:
   m_ObjectHideFlags: 0

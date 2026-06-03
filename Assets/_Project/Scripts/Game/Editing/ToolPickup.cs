@@ -47,7 +47,7 @@ namespace _Project.Scripts.Game.Editing
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            EditController.Instance.сurrentTool = toolType;
+            EditController.Instance.currentTool = toolType;
             ToolInHand = true;
             PickUp();
         }
@@ -64,7 +64,7 @@ namespace _Project.Scripts.Game.Editing
         {
             _picked = false;
             _group.blocksRaycasts = true;
-            EditController.Instance.сurrentTool = EditController.ToolType.None;
+            EditController.Instance.currentTool = EditController.ToolType.None;
         }
     }
 }
