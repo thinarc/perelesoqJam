@@ -17,11 +17,14 @@ namespace _Project.Scripts.Sound
         public SFXHandle SFXHandle { get; private set; } = new();
         public AmbientHandle AmbientHandle { get; private set; } = new();
         public UIHandle UIHandle { get; private set; } = new();
-        
-    
+        public ActionHandle ActionHandle { get; private set; } = new();
+
+
         // add other Buses
         private Bus _musicBus;
         private Bus _sfxBus;
+        private Bus _sfxActionBus;
+        private Bus _sfxEventBus;
         private Bus _bgBus;
         private Bus _uiBus;
         private Bus _masterBus;
@@ -55,6 +58,36 @@ namespace _Project.Scripts.Sound
                 PlayerPrefs.SetFloat("SFX", _sfxVolume);
             }
         } 
+        
+        // SFXAction
+        private float _sfxActionVolume;
+
+        public float SFXActionVolume
+        {
+            get => _sfxActionVolume;
+            set
+            {
+                if (value is > 1f or < 0) return;
+                _sfxActionVolume = value;
+                _sfxActionBus.setVolume(_sfxActionVolume);
+                PlayerPrefs.SetFloat("SFXAction", _sfxActionVolume);
+            }
+        }
+        
+        // SFXEvent
+        private float _sfxEventVolume;
+
+        public float SFXEventVolume
+        {
+            get => _sfxEventVolume;
+            set
+            {
+                if (value is > 1f or < 0) return;
+                _sfxEventVolume = value;
+                _sfxEventBus.setVolume(_sfxEventVolume);
+                PlayerPrefs.SetFloat("SFXEvent", _sfxEventVolume);
+            }
+        }
         
         // storage of buses variables (bg Bus)
         private float _bgVolume;
@@ -114,12 +147,20 @@ namespace _Project.Scripts.Sound
             //Music Bus
             _musicBus = FMODUnity.RuntimeManager.GetBus("bus:/Music");
             MusicVolume = PlayerPrefs.GetFloat("Music", 0.6f);
+            
             //SFX Bus
             _sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
+            _sfxActionBus = FMODUnity.RuntimeManager.GetBus("bus:/SFX/SFXAction");
+            _sfxEventBus = FMODUnity.RuntimeManager.GetBus("bus:/SFX/SFXEvent");
+            
             SFXVolume = PlayerPrefs.GetFloat("SFX", 1f);
+            SFXActionVolume = PlayerPrefs.GetFloat("SFXAction", 1f);
+            SFXEventVolume = PlayerPrefs.GetFloat("SFXEvent", 1f);
+            
             //bg Bus 
             _bgBus = FMODUnity.RuntimeManager.GetBus("bus:/bg");
             bgVolume = PlayerPrefs.GetFloat("bg", 1f); 
+            
             //UI Bus
             _uiBus = FMODUnity.RuntimeManager.GetBus("bus:/UI");
             UIVolume = PlayerPrefs.GetFloat("UI", 1f); 
@@ -134,6 +175,7 @@ namespace _Project.Scripts.Sound
             SFXHandle.Initialize();
             AmbientHandle.Initialize();
             UIHandle.Initialize();
+            ActionHandle.Initialize();
             
             // I set background music there
             MusicHandle.PlayPianoTheme();

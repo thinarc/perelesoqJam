@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{b9d8c9ac-1fe4-4e13-8738-3c25c5eb69e3}">
 		<property name="assetPath">
-			<value>Ominous 1 Shot/Regret.wav</value>
+			<value>SFX/SFXEvent/Regret.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

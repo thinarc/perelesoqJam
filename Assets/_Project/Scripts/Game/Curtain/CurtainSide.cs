@@ -1,3 +1,4 @@
+using _Project.Scripts.Sound;
 using _Project.Scripts.Common.HUD.Cursor;
 using DG.Tweening;
 using UnityEngine;
@@ -69,6 +70,7 @@ namespace _Project.Scripts.Game.Curtain
         public void OnPointerDown(PointerEventData eventData)
         {
             dragging = true;
+            SoundManager.Instance.ActionHandle.PlayCurtain(); // ЗВУК ШТОРЫ ЗДЕСЬ
             CursorModeSwitcher.Instance.SetToolMode();
         }
 
@@ -81,6 +83,7 @@ namespace _Project.Scripts.Game.Curtain
         public void OnPointerUp(PointerEventData eventData)
         {
             dragging = false;
+            SoundManager.Instance.ActionHandle.StopCurtain(); // ВЫКЛЮЧИТЬ ЗВУК ШТОРЫ
             if (!Dragging && !Placed) CursorModeSwitcher.Instance.SetDefaultMode();
         }
 
@@ -101,6 +104,10 @@ namespace _Project.Scripts.Game.Curtain
                 var current = _value;
                 Set(current + delta);
             }
+            
+            // if curtain reachs a side => stop sound
+            if (_value <= 0f || _value >= 1f)
+                SoundManager.Instance.ActionHandle.StopCurtain();
         }
     }
 }

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{53b538a0-aca4-4b21-99ed-c962f8000aba}">
 		<property name="assetPath">
-			<value>Ominous 1 Shot/Caution.wav</value>
+			<value>SFX/SFXEvent/Caution.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

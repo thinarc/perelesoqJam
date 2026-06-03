@@ -19,13 +19,13 @@ namespace _Project.Scripts.Sound.Handles
         public void Initialize()
             // create a live copy for event to control it
         { 
-            _caution = RuntimeManager.CreateInstance("event:/SFX/Caution");
+            _caution = RuntimeManager.CreateInstance("event:/SFX/Event/Caution");
                 //_caution.set3DAttributes(RuntimeUtils.To3DAttributes(Vector3.zero));
     
-            _regret = RuntimeManager.CreateInstance("event:/SFX/Regret");
+            _regret = RuntimeManager.CreateInstance("event:/SFX/Event/Regret");
                 //_regret.set3DAttributes(RuntimeUtils.To3DAttributes(Vector3.zero));
     
-            _ominous = RuntimeManager.CreateInstance("event:/SFX/Ominous");
+            _ominous = RuntimeManager.CreateInstance("event:/SFX/Event/Ominous");
                 //_ominous.set3DAttributes(RuntimeUtils.To3DAttributes(Vector3.zero));
                 
             _lightout = RuntimeManager.CreateInstance("event:/SFX/Event/LightOut");
