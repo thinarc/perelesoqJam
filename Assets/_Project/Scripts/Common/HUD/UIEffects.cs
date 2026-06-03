@@ -193,15 +193,8 @@ public class UIEffects : MonoBehaviour,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (photo && photoToRotate)
-        {
-            
-        }
-        else
-        {
-            if (ToolPickup.ToolInHand && !photo) return;
-            if (photo && !ToolPickup.ToolInHand) return;
-        }
+        if (ToolPickup.ToolInHand && !photo) return;
+        if (photo && !ToolPickup.ToolInHand) return;
         
         hovering = true;
 
@@ -240,10 +233,12 @@ public class UIEffects : MonoBehaviour,
     }
 
     public bool yaTool;
+    public bool yaInactiveList;
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (yaTool && EditController.Instance.prepareRotate) return;
+        if (yaInactiveList) return;
         
         if (photoToRotate && !photo)
         {

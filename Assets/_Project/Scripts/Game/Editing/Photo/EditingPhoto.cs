@@ -11,6 +11,8 @@ namespace _Project.Scripts.Game.Editing.Photo
 
         [SerializeField, Space(5)] private Sprite rotatePhoto;
 
+        [SerializeField, Space(5)] private bool acceptable = true;
+
         private CanvasGroup _particlesGroup;
 
         private bool _rotated;
@@ -55,6 +57,8 @@ namespace _Project.Scripts.Game.Editing.Photo
                     )
                     .SetEase(Ease.OutQuad)
             );
+            
+            EditController.Instance.ShowButtons();
         }
 
         public void PrepareToRotate()
