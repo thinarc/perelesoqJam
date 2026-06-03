@@ -46,7 +46,7 @@ namespace _Project.Scripts.Common.HUD.Cursor
             cursorRoot.position = Vector2.Lerp(
                 cursorRoot.position,
                 target,
-                followSpeed * Time.deltaTime
+                followSpeed * Time.unscaledDeltaTime
             );
         }
 

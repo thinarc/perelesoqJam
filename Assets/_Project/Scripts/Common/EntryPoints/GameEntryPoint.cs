@@ -15,8 +15,8 @@ namespace _Project.Scripts.Common.EntryPoints
 
         private void Start()
         {
-            locationSwitcher.StartLocation();
-            // mainMenu.ShowMenu();
+            // locationSwitcher.StartLocation();
+            mainMenu.ShowMenu();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace _Project.Scripts.Game.Editing
             {
                 var dirt = dirtPrefabs[Random.Range(0, dirtPrefabs.Length)];
 
-                var particle = Instantiate(dirt, targetPhoto.GetDustRect());
+                var particle = Instantiate(dirt, targetPhoto.GetDirtRect());
                 var rt = particle.GetComponent<RectTransform>();
 
                 var randomX = Random.Range(dirtRect.xMin, dirtRect.xMax);
@@ -52,7 +52,7 @@ namespace _Project.Scripts.Game.Editing
 
                 rt.anchoredPosition = new Vector2(randomX, randomY);
 
-                var randomScale = Random.Range(scaleDustRange.x, scaleDustRange.y);
+                var randomScale = Random.Range(scaleDirtRange.x, scaleDirtRange.y);
                 rt.localScale = Vector3.one * randomScale;
                 
                 rt.localRotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));

@@ -866,7 +866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Game.Editing.EditingPhoto
   dustRect: {fileID: 1316313345}
-  dirtRect: {fileID: 0}
+  dirtRect: {fileID: 1245549004}
 --- !u!1 &166816818
 GameObject:
   m_ObjectHideFlags: 0
@@ -3235,8 +3235,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 5}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2.5}
+  m_SizeDelta: {x: 0, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &697472176
 CanvasRenderer:
@@ -3254,7 +3254,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697472173}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -14078,7 +14078,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35, y: -50}
+  m_AnchoredPosition: {x: 50, y: -50}
   m_SizeDelta: {x: 117, y: 137}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108795870
@@ -14281,8 +14281,10 @@ MonoBehaviour:
   - {fileID: 7993632414712994195, guid: 267f85fe591023043a0746971b80bf0b, type: 3}
   - {fileID: 1484356920125568774, guid: ed4f46492c30ef04f933744ce23bec4b, type: 3}
   - {fileID: 1366316250568147665, guid: eda5fbd793f4da446b58b85e4872d763, type: 3}
-  spawnCount: 10
-  scaleRange: {x: 0.8, y: 1.3}
+  spawnDust: 10
+  scaleDustRange: {x: 0.8, y: 1.3}
+  spawnDirt: 5
+  scaleDirtRange: {x: 0.7, y: 1.2}
 --- !u!1 &2131855486
 GameObject:
   m_ObjectHideFlags: 0
@@ -14546,7 +14548,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2146308611}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
