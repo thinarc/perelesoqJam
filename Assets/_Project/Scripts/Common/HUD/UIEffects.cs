@@ -1,4 +1,6 @@
 using System;
+using _Project.Scripts.Game.Editing;
+using _Project.Scripts.Game.Editing.Photo;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -185,9 +187,18 @@ public class UIEffects : MonoBehaviour,
         }
     }
 
+    public bool photo;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (ToolPickup.ToolInHand && !photo) return;
+        if (photo && !ToolPickup.ToolInHand) return;
         hovering = true;
+
+        if (photo)
+        {
+            SprayTool.InPhotoSpawn = true;
+        }
 
         if (Has(UIEffectType.HoverScale))
         {
@@ -202,6 +213,11 @@ public class UIEffects : MonoBehaviour,
     public void OnPointerExit(PointerEventData eventData)
     {
         hovering = false;
+        
+        if (photo)
+        {
+            SprayTool.InPhotoSpawn = false;
+        }
 
         if (Has(UIEffectType.HoverScale))
         {
@@ -215,6 +231,9 @@ public class UIEffects : MonoBehaviour,
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (ToolPickup.ToolInHand && !photo) return;
+        if (photo && !ToolPickup.ToolInHand) return;
+        
         if (!Has(UIEffectType.PressScale))
             return;
 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5253259103353331009}
   - component: {fileID: 4014386381544903274}
+  - component: {fileID: -4354544158475572312}
   - component: {fileID: 7325648085937765310}
   m_Layer: 5
   m_Name: r9
@@ -45,6 +46,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6631396994578798761}
   m_CullTransparentMesh: 1
+--- !u!114 &-4354544158475572312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6631396994578798761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08cdbed0b0ed4f00a88bd2eaceec3627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Game.Editing.Photo.ParticleSpot
+  requiredTool: 1
 --- !u!114 &7325648085937765310
 MonoBehaviour:
   m_ObjectHideFlags: 0

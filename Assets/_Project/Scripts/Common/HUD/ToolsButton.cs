@@ -1,5 +1,6 @@
 using _Project.Scripts.Common.HUD.Cursor;
 using _Project.Scripts.Curtain;
+using _Project.Scripts.Game.Editing;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,6 +10,8 @@ namespace _Project.Scripts.Common.HUD
     {
         private bool _placed;
         private bool _hold;
+
+        public bool holded = true;
         
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -28,6 +31,7 @@ namespace _Project.Scripts.Common.HUD
         {
             _placed = false;
             if (!_placed && !_hold) CursorModeSwitcher.Instance.SetDefaultMode();
+            else if (!holded) CursorModeSwitcher.Instance.SetDefaultMode();
         }
 
         public void OnPointerUp(PointerEventData eventData)

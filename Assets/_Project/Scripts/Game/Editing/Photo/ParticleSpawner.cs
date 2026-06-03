@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Game.Editing
+namespace _Project.Scripts.Game.Editing.Photo
 {
     public class ParticleSpawner : MonoBehaviour
     {

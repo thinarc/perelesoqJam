@@ -18,8 +18,9 @@ namespace _Project.Scripts.Curtain
 
         private CanvasGroup _group;
         
-        public bool Open => left.Open && right.Open;
-
+        // public bool Open => left.Open && right.Open;
+        public bool Open => true;
+        
         private void Awake()
         {
             Instance = this;

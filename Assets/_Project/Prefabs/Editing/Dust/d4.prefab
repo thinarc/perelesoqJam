@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3112026419814013330}
+  - component: {fileID: -1110860158382064205}
   - component: {fileID: 7163056626498936464}
   - component: {fileID: 5403296345720730658}
   m_Layer: 5
@@ -37,6 +38,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 147}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &-1110860158382064205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162752375037630888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08cdbed0b0ed4f00a88bd2eaceec3627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Game.Editing.Photo.ParticleSpot
+  requiredTool: 0
 --- !u!222 &7163056626498936464
 CanvasRenderer:
   m_ObjectHideFlags: 0
