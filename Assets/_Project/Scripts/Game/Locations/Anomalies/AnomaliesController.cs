@@ -4,6 +4,7 @@ using _Project.Scripts.Curtain;
 using _Project.Scripts.Game.Editing;
 using _Project.Scripts.Game.Locations.Scenes;
 using _Project.Scripts.Game.Menus;
+using _Project.Scripts.Sound; // Подключаем пространство имен звукового менеджера
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,6 +50,15 @@ namespace _Project.Scripts.Game.Locations.Anomalies
                 GetComponent<StreetScene>().SetupSkyBlink(ano.appliedPic[0], ano.appliedPic[1]);
             }
 
+            // --- ЗДЕСЬ ПРОПИСЫВАЕМ ЗАПУСК СЛУЧАЙНЫХ ЗВУКОВ ---
+            if (ano.soundMethodName == "Footsteps") SoundManager.Instance.AnomalyHandle.Footsteps();
+            else if (ano.soundMethodName == "Whispered") SoundManager.Instance.AnomalyHandle.Whispered();
+            else if (ano.soundMethodName == "Phone") SoundManager.Instance.AnomalyHandle.Phone();
+            else if (ano.soundMethodName == "Scream") SoundManager.Instance.AnomalyHandle.Scream();
+            else if (ano.soundMethodName == "Ominous") SoundManager.Instance.SFXHandle.PlayOminous();
+            else if (ano.soundMethodName == "Caution") SoundManager.Instance.SFXHandle.PlayCaution();
+            else if (ano.soundMethodName == "Regret") SoundManager.Instance.SFXHandle.PlayRegret();
+
             while (true)
             {
                 await UniTask.Yield();
@@ -80,6 +90,13 @@ namespace _Project.Scripts.Game.Locations.Anomalies
             
             if (_currentAnomaly.appliedPic.Length == 1) _currentAnomaly.target.sprite = _currentAnomaly.pastSprite;
             else if (_currentAnomaly.appliedPic.Length == 2) GetComponent<StreetScene>().ReturnOldSky();
+
+            // --- ЗДЕСЬ ОТКЛЮЧАЕМ ПОТОКОВЫЕ ЗВУКИ АНОМАЛИЙ ПРИ ИХ ИСЧЕЗНОВЕНИИ ---
+            SoundManager.Instance.AnomalyHandle.GoOut();          // Гасит шаги
+            SoundManager.Instance.AnomalyHandle.StopMumbling();   // Гасит шёпот
+            
+            SoundManager.Instance.MusicHandle.PlayRandomBackgroundMusic(); 
+
             _currentAnomaly = null;
         }
     }
@@ -91,5 +108,7 @@ namespace _Project.Scripts.Game.Locations.Anomalies
         public Sprite[] appliedPic;
         [HideInInspector] public Sprite pastSprite;
         public float hpAno;
+        [Tooltip("Впиши сюда: Regret, Ominous, Caution, Footsteps, Scream, Whispered, Phone")]
+        public string soundMethodName;
     }
 }

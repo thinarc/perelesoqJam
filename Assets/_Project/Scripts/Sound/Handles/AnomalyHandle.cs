@@ -14,6 +14,7 @@ namespace _Project.Scripts.Sound.Handles
         private EventInstance _whispered;
         private EventInstance _phone;
         private EventInstance _footsteps;
+        private EventInstance _scream;
         
         
         // save the link what is current track
@@ -25,6 +26,7 @@ namespace _Project.Scripts.Sound.Handles
             _whispered = RuntimeManager.CreateInstance("event:/Anomaly/Whispered");
             _phone = RuntimeManager.CreateInstance("event:/Anomaly/Phone");
             _footsteps = RuntimeManager.CreateInstance("event:/Anomaly/Footsteps");
+            _scream = RuntimeManager.CreateInstance("event:/Anomaly/Scream");
         }
 
         public void Whispered()
@@ -60,6 +62,11 @@ namespace _Project.Scripts.Sound.Handles
             }
             
 
+        }
+
+        public void Scream()
+        {
+            _scream.start();
         }
 
 

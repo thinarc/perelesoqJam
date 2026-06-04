@@ -1,83 +1,108 @@
-// connect library
 using FMOD.Studio;
 using FMODUnity;
 
-// address 
 namespace _Project.Scripts.Sound.Handles
 {
-    // class named
     public class MusicHandle
-        
-        
-    // set variables
     {
         private EventInstance _mainTheme;
         private EventInstance _pianoTheme;
         private EventInstance _bgCello;
         
-        // save the link what is current track
+        // Ссылка на текущий играющий трек
         private EventInstance _currentTrack;
 
         public void Initialize()
-        // create a live copy for event to control it
         {
             _mainTheme = RuntimeManager.CreateInstance("event:/Music/Main_Them");
             _pianoTheme = RuntimeManager.CreateInstance("event:/Music/S_Piano_Th");
-			_bgCello = RuntimeManager.CreateInstance("event:/Music/Bg_Cello");
+            _bgCello = RuntimeManager.CreateInstance("event:/Music/Bg_Cello");
         }
 
-        
-        // external buttons
         public void PlayMainTheme()
         {
             SwitchTo(_mainTheme);
         }
+
         public void PlayPianoTheme()
         {
             SwitchTo(_pianoTheme);
         }
-		public void PlayBgCello()
-		{
-			SwitchTo(_bgCello);
-		}
+
+        public void PlayBgCello()
+        {
+            SwitchTo(_bgCello);
+        }
+
+        // --- НОВЫЙ МЕТОД: ВЫБОР СЛУЧАЙНОГО ТРЕКА ДЛЯ ФОНА ---
+        public void PlayRandomBackgroundMusic()
+        {
+            // Генерируем случайное число от 0 до 2 включительно
+            int randomTrack = UnityEngine.Random.Range(0, 3);
+
+            switch (randomTrack)
+            {
+                case 0:
+                    SwitchTo(_mainTheme);
+                    break;
+                case 1:
+                    SwitchTo(_pianoTheme);
+                    break;
+                case 2:
+                    SwitchTo(_bgCello);
+                    break;
+            }
+        }
         
-        
-        //Lets stop the music
         public void StopMusic()
         {
-            _currentTrack.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            if (_currentTrack.isValid())
+            {
+                _currentTrack.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
         }
 
         public void PauseMusic()
         {
-            _currentTrack.setPaused(true);
+            if (_currentTrack.isValid())
+            {
+                _currentTrack.setPaused(true);
+            }
         }
 
         public void ResumeMusic()
         {
-            _currentTrack.setPaused(false);
+            if (_currentTrack.isValid())
+            {
+                _currentTrack.setPaused(false);
+            }
         }
 
         private void SwitchTo(EventInstance newTrack)
-        // check: does a current track exist?
         {
             if (_currentTrack.isValid())
+            {
                 _currentTrack.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
+            
             _currentTrack = newTrack;
             _currentTrack.start();
         }
         
-        // im setting all parametrs here
         public void SetLowPass(float value)
         {
-            _currentTrack.setParameterByName("LowPass", value, false);
+            if (_currentTrack.isValid())
+            {
+                _currentTrack.setParameterByName("LowPass", value, false);
+            }
         }
 
         public void SetVolume(float value)
         {
-            _currentTrack.setParameterByName("Volume", value, false);
+            if (_currentTrack.isValid())
+            {
+                _currentTrack.setParameterByName("Volume", value, false);
+            }
         }
     }
-    
-    
 }

@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace _Project.Scripts.Game.Menus
 {
     public class MainMenu : MonoBehaviour
@@ -40,6 +41,7 @@ namespace _Project.Scripts.Game.Menus
             creditsGroup.blocksRaycasts = false;
 
             volume.value = SoundManager.Instance.MasterVolume;
+            SoundManager.Instance.AmbientHandle.PlayStreet();
             ChooseVolumeHint();
         }
 
@@ -68,6 +70,8 @@ namespace _Project.Scripts.Game.Menus
             _group.interactable = true;
             _group.blocksRaycasts = true;
             
+            SoundManager.Instance.AmbientHandle.PlayStreet();
+            
             _open = true;
             Time.timeScale = 0;
 
@@ -85,10 +89,19 @@ namespace _Project.Scripts.Game.Menus
             _group.interactable = false;
             _group.blocksRaycasts = false;
             
-            rain.gameObject.SetActive(false);
+            SoundManager.Instance.AmbientHandle.StopStreet();
             
-            if (!pause && !_started) GameEntryPoint.Instance.locationSwitcher.StartLocation();
-            else headerText.text = "";
+            rain.gameObject.SetActive(false);
+
+            if (!pause && !_started)
+            {
+                SoundManager.Instance.AmbientHandle.GlobalClock();
+                GameEntryPoint.Instance.locationSwitcher.StartLocation();
+            }
+            else
+            {
+                headerText.text = "";
+            }
             
             Time.timeScale = 1;
             _open = false;

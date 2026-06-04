@@ -223,8 +223,8 @@ namespace _Project.Scripts.Sound
             AnomalyHandle.Initialize();
             
             // I set background music there
-            MusicHandle.PlayPianoTheme();
-            AmbientHandle.GlobalClock();
+            //MusicHandle.PlayPianoTheme();
+            
             
             
             // сбросить на нормальные значения после инициализации
