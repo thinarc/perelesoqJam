@@ -39,12 +39,12 @@ namespace _Project.Scripts.Sound.Handles
 
         public void Phone()
         {
-            _phone.start():
+            _phone.start();
         }
 
         public void Footsteps()
         {
-            _footsteps.start():
+            _footsteps.start();
         }
 
         public void GoOut()
@@ -54,7 +54,7 @@ namespace _Project.Scripts.Sound.Handles
 
         public void SetLowPass(float value)
         {
-            _footsteps.setParametrByName("LowPass", value);
+            _footsteps.setParameterByName("LowPass", value);
         }
 
 

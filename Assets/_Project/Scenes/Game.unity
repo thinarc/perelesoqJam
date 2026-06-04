@@ -2176,7 +2176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &222812903
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25380,6 +25380,7 @@ MonoBehaviour:
   currentWrongPhoto: 0
   rejectPhoto: 0
   listEffects: {fileID: 225508716}
+  currentProgress: 0
 --- !u!114 &2127566977
 MonoBehaviour:
   m_ObjectHideFlags: 0
