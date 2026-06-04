@@ -12,6 +12,8 @@ namespace _Project.Scripts.Sound.Handles
     // set variables
     {
         private EventInstance _whispered;
+        private EventInstance _phone;
+        private EventInstance _footsteps;
         
         
         // save the link what is current track
@@ -21,11 +23,41 @@ namespace _Project.Scripts.Sound.Handles
         // create a live copy for event to control it
         {
             _whispered = RuntimeManager.CreateInstance("event:/Anomaly/Whispered");
+            _phone = RuntimeManager.CreateInstance("event:/Anomaly/Phone");
+            _footsteps = RuntimeManager.CreateInstance("event:/Anomaly/Footsteps");
         }
 
-        
-        
-        
+        public void Whispered()
+        {
+            _whispered.start();
+        }
+
+        public void StopMumbling()
+        {
+            _whispered.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+
+        public void Phone()
+        {
+            _phone.start():
+        }
+
+        public void Footsteps()
+        {
+            _footsteps.start():
+        }
+
+        public void GoOut()
+        {
+            _footsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); 
+        }
+
+        public void SetLowPass(float value)
+        {
+            _footsteps.setParametrByName("LowPass", value);
+        }
+
+
     }
     
     

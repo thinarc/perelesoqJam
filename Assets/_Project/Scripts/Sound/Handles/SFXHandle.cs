@@ -15,6 +15,7 @@ namespace _Project.Scripts.Sound.Handles
         private EventInstance _regret;
         private EventInstance _ominous;
         private EventInstance _lightout;
+       
 
         public void Initialize()
             // create a live copy for event to control it
@@ -29,6 +30,7 @@ namespace _Project.Scripts.Sound.Handles
                 //_ominous.set3DAttributes(RuntimeUtils.To3DAttributes(Vector3.zero));
                 
             _lightout = RuntimeManager.CreateInstance("event:/SFX/Event/LightOut");
+            
                 
         }
 
@@ -79,6 +81,11 @@ namespace _Project.Scripts.Sound.Handles
         public void StopLightOut()
         {
             _lightout.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+
+        public void PlayPhone()
+        {
+            _phone.start();
         }
         
          
