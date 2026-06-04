@@ -481,6 +481,7 @@ MonoBehaviour:
   visionCam: {fileID: 1475699420}
   spaceText: {fileID: 1826230015}
   steps: 10
+  waitReturn: 0
 --- !u!1 &51622115
 GameObject:
   m_ObjectHideFlags: 0
