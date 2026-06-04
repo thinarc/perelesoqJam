@@ -154,7 +154,7 @@ namespace _Project.Scripts.Game.Editing
                 var s = shine.childCount;
                 
                 var completeClean = d == 0 && r == 0 && s >= targetS;
-                if (!photo.acceptable) completeClean = d <= 2;
+                if (!photo.acceptable) completeClean = d <= 2 && s >= targetS;
                 
                 await UniTask.Yield();
                 if (completeClean) break;
@@ -162,12 +162,9 @@ namespace _Project.Scripts.Game.Editing
             
             
             
-            photo.PrepareToRotate(out waitChoose);
+            photo.PrepareToRotate();
             prepareRotate = true;
-            
-            
-            
-            await UniTask.WaitUntil(() => waitChoose);
+            waitChoose = true;
 
             acceptButton.onClick.RemoveAllListeners();
             rejectButton.onClick.RemoveAllListeners();

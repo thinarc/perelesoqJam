@@ -50,8 +50,6 @@ namespace _Project.Scripts.Game.Editing.Photo
             if (_rotated)
                 return;
             SoundManager.Instance.ActionHandle.PlayPhoto();
-
-            EditController.Instance.waitChoose = true;
             GetComponent<UIEffects>().photo = true;
             
             _particlesGroup.DOFade(0, 0.2f).SetEase(Ease.InQuad);
@@ -87,9 +85,8 @@ namespace _Project.Scripts.Game.Editing.Photo
             EditController.Instance.ShowButtons();
         }
 
-        public void PrepareToRotate(out bool waitChoose)
+        public void PrepareToRotate()
         {
-            waitChoose = false;
             if (!this) return;
             GetComponent<UIEffects>().photo = false;
             GetComponent<UIEffects>().photoToRotate = true;

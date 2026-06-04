@@ -34,7 +34,13 @@ namespace _Project.Scripts.Game.Locations
             _group.interactable = false;
             _group.blocksRaycasts = false;
             
-            locations.ForEach(l => l.scene.Initialize(this));
+            locations.ForEach(l =>
+            {
+                l.scene.Initialize(this);
+                var group = l.scene.GetComponent<CanvasGroup>();
+                group.blocksRaycasts = false;
+                group.interactable = false;
+            });
             InitButtons();
         }
 
@@ -53,6 +59,9 @@ namespace _Project.Scripts.Game.Locations
             locations.ForEach(l => l.scene.InitialHide());
             locations[0].scene.Show(true);
             locations[0].scene.UpdateLight();
+            var group = locations[0].scene.GetComponent<CanvasGroup>();
+            group.blocksRaycasts = true;
+            group.interactable = true;
             
             _currentLoc = locations[0];
             InitButtons();
@@ -149,6 +158,9 @@ namespace _Project.Scripts.Game.Locations
             await _currentLoc.scene.Hide(l.scene.Ease, l.scene.Time);
             l.scene.Show();
             l.scene.UpdateLight();
+            var group = l.scene.GetComponent<CanvasGroup>();
+            group.blocksRaycasts = true;
+            group.interactable = true;
 
             _currentLoc = l;
             InitButtons();
