@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using _Project.Scripts.Sound;
 
 namespace _Project.Scripts.Game.Editing.Photo
 {
@@ -48,6 +49,7 @@ namespace _Project.Scripts.Game.Editing.Photo
         {
             if (_rotated)
                 return;
+            SoundManager.Instance.ActionHandle.PlayPhoto();
 
             EditController.Instance.waitChoose = true;
             GetComponent<UIEffects>().photo = true;
