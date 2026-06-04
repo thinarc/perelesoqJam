@@ -18,7 +18,7 @@ namespace _Project.Scripts.Sound
         public AmbientHandle AmbientHandle { get; private set; } = new();
         public UIHandle UIHandle { get; private set; } = new();
         public ActionHandle ActionHandle { get; private set; } = new();
-
+        public AnomalyHandle AnomalyHandle { get; private set; } = new();
 
         // add other Buses
         private Bus _musicBus;
@@ -27,6 +27,8 @@ namespace _Project.Scripts.Sound
         private Bus _sfxEventBus;
         private Bus _bgBus;
         private Bus _uiBus;
+        private Bus _toolsBus;
+        private Bus _anomalyBus;
         private Bus _masterBus;
         
         // storage of buses variables (Music Bus)
@@ -119,6 +121,36 @@ namespace _Project.Scripts.Sound
             }
         } 
         
+        // Tools BUS
+        private float _toolsVolume;
+
+        public float ToolsVolume
+        {
+            get => _toolsVolume;
+            set
+            {
+                if (value is > 1f or < 0) return;
+                _toolsVolume = value;
+                _toolsBus.setVolume(_toolsVolume);
+                PlayerPrefs.SetFloat("ToolsVolume", _toolsVolume);
+            }
+        }
+        
+        // AnomalyBus
+        private float _anomalyVolume;
+
+        public float AnomalyVolume
+        {
+            get => _anomalyVolume;
+            set
+            {
+                if (value is > 1f or < 0) return;
+                _anomalyVolume = value;
+                _anomalyBus.setVolume(_anomalyVolume);
+                PlayerPrefs.SetFloat("AnomalyVolume", _anomalyVolume);
+            }
+        }
+        
         // MASTER
         private float _masterVolume;
         public float MasterVolume
@@ -169,6 +201,14 @@ namespace _Project.Scripts.Sound
             _uiBus = FMODUnity.RuntimeManager.GetBus("bus:/UI");
             UIVolume = PlayerPrefs.GetFloat("UI", 1f); 
             
+            //ToolsBus
+            _toolsBus = FMODUnity.RuntimeManager.GetBus("bus:/Tools");
+            ToolsVolume = PlayerPrefs.GetFloat("Tools", 1f); 
+            
+            //Anomaly Bus
+            _anomalyBus = FMODUnity.RuntimeManager.GetBus("bus:/Anomaly");
+            AnomalyVolume = PlayerPrefs.GetFloat("Anomaly", 1f); 
+            
             //MASTER
             _masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
             MasterVolume = PlayerPrefs.GetFloat("Master", 0.6f);
@@ -180,6 +220,7 @@ namespace _Project.Scripts.Sound
             AmbientHandle.Initialize();
             UIHandle.Initialize();
             ActionHandle.Initialize();
+            AnomalyHandle.Initialize();
             
             // I set background music there
             MusicHandle.PlayPianoTheme();

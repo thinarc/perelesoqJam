@@ -9,6 +9,7 @@ using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using _Project.Scripts.Sound;
 
 namespace _Project.Scripts.Game.Editing
 {
@@ -159,16 +160,24 @@ namespace _Project.Scripts.Game.Editing
                 if (completeClean) break;
             }
             
+            
+            
             photo.PrepareToRotate(out waitChoose);
             prepareRotate = true;
+            
+            
             
             await UniTask.WaitUntil(() => waitChoose);
 
             acceptButton.onClick.RemoveAllListeners();
             rejectButton.onClick.RemoveAllListeners();
             
+            
+            
             acceptButton.onClick.AddListener(async () =>
             {
+                SoundManager.Instance.UIHandle.PlayHover();
+                
                 rejectPhoto = false;
                 CloseButtons();
 
@@ -176,6 +185,9 @@ namespace _Project.Scripts.Game.Editing
                 // else waitChoose = false;
                 
                 waitChoose = false;
+                
+                // SOUND?
+                SoundManager.Instance.ActionHandle.PlayPhoto();
 
                 photo.GetComponent<UIEffects>().onAnotherAnim = true;
                 photo.transform.DORotate(new Vector3(0f, 0f, 15f), 0.15f);
@@ -191,6 +203,8 @@ namespace _Project.Scripts.Game.Editing
             
             rejectButton.onClick.AddListener(async () =>
             {
+                SoundManager.Instance.UIHandle.PlayExit();
+                
                 CloseButtons();
                 
                 var image = photo.GetComponent<Image>();
@@ -198,6 +212,9 @@ namespace _Project.Scripts.Game.Editing
                 var direction = Random.value > 0.5f ? -1f : 1f;
                 
                 photo.GetComponent<UIEffects>().onAnotherAnim = true;
+                
+                // SOUND?
+                SoundManager.Instance.ActionHandle.PlayPhoto();
 
                 photo.transform
                     .DORotate(

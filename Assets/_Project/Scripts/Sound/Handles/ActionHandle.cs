@@ -11,6 +11,7 @@ namespace _Project.Scripts.Sound.Handles
         private EventInstance _brush;
         private EventInstance _nag;
         private EventInstance _spray;
+        private EventInstance _photo;
         private float _lastPlayTime;
         private const float StopDelay = 0.15f; // Время сглаживания «песка»
         private bool _isPlayRequested;
@@ -23,6 +24,7 @@ namespace _Project.Scripts.Sound.Handles
             _brush = RuntimeManager.CreateInstance("event:/SFX/Action/Brush");
             _nag = RuntimeManager.CreateInstance("event:/SFX/Action/Nag");
             _spray = RuntimeManager.CreateInstance("event:/SFX/Action/Spray");
+            _photo = RuntimeManager.CreateInstance("event:/SFX/Action/Photo");
             _curtainSpeed = 0f;
         }
 
@@ -113,6 +115,11 @@ namespace _Project.Scripts.Sound.Handles
         public void StopSpray()
         {
             _spray.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+        // Change a photo
+        public void PlayPhoto()
+        {
+            _photo.start();
         }
     }
 }
