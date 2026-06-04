@@ -10,6 +10,7 @@ namespace _Project.Scripts.Sound.Handles
         private EventInstance _openCurtain;
         private EventInstance _brush;
         private EventInstance _nag;
+        private EventInstance _spray;
         private float _lastPlayTime;
         private const float StopDelay = 0.15f; // Время сглаживания «песка»
         private bool _isPlayRequested;
@@ -21,7 +22,7 @@ namespace _Project.Scripts.Sound.Handles
             _openCurtain = RuntimeManager.CreateInstance("event:/SFX/Action/OpenCurtain");
             _brush = RuntimeManager.CreateInstance("event:/SFX/Action/Brush");
             _nag = RuntimeManager.CreateInstance("event:/SFX/Action/Nag");
-
+            _spray = RuntimeManager.CreateInstance("event:/SFX/Action/Spray");
             _curtainSpeed = 0f;
         }
 
@@ -95,6 +96,23 @@ namespace _Project.Scripts.Sound.Handles
         public void PlayNag()
         {
             _nag.start();
+        }
+        // SPRAY SOUND
+        public void PlaySpray()
+        {
+            _spray.getPlaybackState(out var state);
+            
+            // Если звук вообще не играет — стартуем его
+            if (state == PLAYBACK_STATE.STOPPED)
+            {
+                _spray.start();
+            }
+            
+        }
+
+        public void StopSpray()
+        {
+            _spray.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }

@@ -1,4 +1,7 @@
+using _Project.Scripts.Sound;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 namespace _Project.Scripts.Game.Editing.Photo
 {
@@ -39,18 +42,21 @@ namespace _Project.Scripts.Game.Editing.Photo
             if (EditController.Instance.currentTool != EditController.ToolType.Spray)
             {
                 sprayParticles.Stop();
+                SoundManager.Instance.ActionHandle.StopSpray();
                 return;
             }
             
             if (!Input.GetMouseButton(0))
             {
                 sprayParticles.Stop();
+                SoundManager.Instance.ActionHandle.StopSpray();
                 return;
             }
             
             if (!InPhotoSpawn)
             {
                 sprayParticles.Stop();
+                SoundManager.Instance.ActionHandle.StopSpray();
                 return;
             }
             
@@ -58,10 +64,12 @@ namespace _Project.Scripts.Game.Editing.Photo
 
             _timer += Time.deltaTime;
             sprayParticles.Play();
+            SoundManager.Instance.ActionHandle.PlaySpray(); 
 
             if (!(_timer >= spawnInterval)) return;
             _timer = 0f;
             SpawnSpot();
+            
         }
 
         private void SpawnSpot()
