@@ -23,7 +23,7 @@ namespace _Project.Scripts.Sound.Handles
         // create a live copy for event to control it
         {
             _whispered = RuntimeManager.CreateInstance("event:/Anomaly/Whispered");
-            _phone = RuntimeManager.CreateInstance("event:/Anomaly/Phone");
+            // _phone = RuntimeManager.CreateInstance("event:/Anomaly/Phone");
             _footsteps = RuntimeManager.CreateInstance("event:/Anomaly/Footsteps");
         }
 
