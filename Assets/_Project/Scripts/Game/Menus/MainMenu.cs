@@ -22,6 +22,9 @@ namespace _Project.Scripts.Game.Menus
         
         [SerializeField] private GameObject creditsCol;
         
+        public Image[] lightings;
+        public GameObject[] header;
+        
         private CanvasGroup _group;
         private bool _open;
         private bool _started;
@@ -42,6 +45,8 @@ namespace _Project.Scripts.Game.Menus
             volume.value = SoundManager.Instance.MasterVolume;
             SoundManager.Instance.AmbientHandle.PlayStreet();
             ChooseVolumeHint();
+            
+            lightings.ForEach(l => l.DOFade(0, 0).SetUpdate(true));
         }
 
         private float _quitTime = 2f;
@@ -71,6 +76,8 @@ namespace _Project.Scripts.Game.Menus
             
             SoundManager.Instance.AmbientHandle.PlayStreet();
             
+            if (!pause) lightings.ForEach(l => l.DOFade(1, 1.4f).SetEase(Ease.InOutSine).SetUpdate(true));
+            
             _open = true;
             Time.timeScale = 0;
 
@@ -83,7 +90,11 @@ namespace _Project.Scripts.Game.Menus
 
         public void CloseMenu(bool pause = false)
         {
-            _group.DOFade(0, 0.2f).SetEase(Ease.InOutSine).SetUpdate(true);
+            if (!pause) lightings.ForEach(l => l.DOFade(0, 0.4f).SetEase(Ease.InOutSine).SetUpdate(true));
+            header.ForEach(h => h.SetActive(false));
+            
+            if (!pause) _group.DOFade(0, 0.6f).SetEase(Ease.InOutSine).SetUpdate(true);
+            else _group.DOFade(0, 0.2f).SetEase(Ease.InOutSine).SetUpdate(true);
             _group.interactable = false;
             _group.blocksRaycasts = false;
             
