@@ -86,6 +86,7 @@ namespace _Project.Scripts.Game.Editing
                 if (Mathf.Approximately(l.fillAmount, 1f)) break;
             }
 
+            currentProgress++;
             waitCrossLine = false;
         }
 
@@ -264,6 +265,8 @@ namespace _Project.Scripts.Game.Editing
 
         public bool rejectPhoto;
         public UIEffects listEffects;
+
+        public int currentProgress;
         
         private void ShuffleChildren(RectTransform parent)
         {
@@ -272,10 +275,28 @@ namespace _Project.Scripts.Game.Editing
             for (var i = count - 1; i > 0; i--)
             {
                 var randomIndex = Random.Range(0, i + 1);
-
                 parent.GetChild(randomIndex).SetSiblingIndex(i);
             }
-            
+
+            if (count > 0)
+            {
+                var firstPhoto = parent.GetChild(0).GetComponent<EditingPhoto>();
+
+                if (firstPhoto != null && !firstPhoto.acceptable)
+                {
+                    for (var i = 1; i < count; i++)
+                    {
+                        var photo = parent.GetChild(i).GetComponent<EditingPhoto>();
+
+                        if (photo != null && photo.acceptable)
+                        {
+                            photo.transform.SetSiblingIndex(0);
+                            break;
+                        }
+                    }
+                }
+            }
+
             buttonGroup.transform.SetAsLastSibling();
         }
 
