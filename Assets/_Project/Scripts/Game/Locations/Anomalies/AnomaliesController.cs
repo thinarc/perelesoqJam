@@ -49,6 +49,8 @@ namespace _Project.Scripts.Game.Locations.Anomalies
             {
                 GetComponent<StreetScene>().SetupSkyBlink(ano.appliedPic[0], ano.appliedPic[1]);
             }
+            
+            SoundManager.Instance.MusicHandle.StopMusic();
 
             // --- ЗДЕСЬ ПРОПИСЫВАЕМ ЗАПУСК СЛУЧАЙНЫХ ЗВУКОВ ---
             if (ano.soundMethodName == "Footsteps") SoundManager.Instance.AnomalyHandle.Footsteps();
