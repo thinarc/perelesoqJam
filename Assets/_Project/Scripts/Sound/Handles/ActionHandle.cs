@@ -1,6 +1,7 @@
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.Sound.Handles
 {
@@ -43,7 +44,7 @@ namespace _Project.Scripts.Sound.Handles
             while (Time.time - _lastPlayTime < StopDelay)
             {
                 // Ждем один кадр Unity
-                await System.Threading.Tasks.Task.Yield();
+                await UniTask.Yield();
             }
 
             // Время вышло, мышь остановилась — глушим звук шторы
