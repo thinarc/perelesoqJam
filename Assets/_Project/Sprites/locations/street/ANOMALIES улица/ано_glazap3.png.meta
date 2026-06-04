@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 21062a5ba994f1948b5d8b246b333a1e
+guid: 6fd7fcb8a7bc1494bb3256e56b8a8114
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1716537046948797066
-    second: 4_BALKONI_0
+      213: 4553099372293145613
+    second: "\u0430\u043D\u043E_glazap3_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 4_BALKONI_0
+      name: "\u0430\u043D\u043E_glazap3_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a8a5e2f795d52d710800000000000000
-      internalID: 1716537046948797066
+      spriteID: d04469871cbdf2f30800000000000000
+      internalID: 4553099372293145613
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      4_BALKONI_0: 1716537046948797066
+      "\u0430\u043D\u043E_glazap3_0": 4553099372293145613
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
