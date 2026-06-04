@@ -86,16 +86,9 @@ namespace _Project.Scripts.Game.Editing
             waitCrossLine = false;
         }
 
-        public bool firstShow = true;
-
         public async void ShowButtons()
         {
-            if (!firstShow) await UniTask.Delay(400);
-            else
-            {
-                await UniTask.Delay(800);
-                firstShow = false;
-            }
+            await UniTask.Delay(1400);
 
             buttonGroup.DOFade(1, 0.4f).SetEase(Ease.InBack);
             await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
@@ -147,7 +140,7 @@ namespace _Project.Scripts.Game.Editing
                 var r = dirt.childCount;
                 var s = shine.childCount;
                 
-                var completeClean = d == 0 && r == 0 && s >= targetS;
+                var completeClean = d == 0 && r == 0 && s == targetS;
                 
                 await UniTask.Yield();
                 if (completeClean) break;
@@ -162,24 +155,18 @@ namespace _Project.Scripts.Game.Editing
             
             acceptButton.onClick.AddListener(async () =>
             {
+                waitChoose = false;
                 rejectPhoto = false;
                 CloseButtons();
-
-                // if (!photo.acceptable && !rejectPhoto) ;
-                // else waitChoose = false;
-                
-                waitChoose = false;
 
                 photo.GetComponent<UIEffects>().onAnotherAnim = true;
                 photo.transform.DORotate(new Vector3(0f, 0f, 15f), 0.15f);
 
-                await photo.GetComponent<RectTransform>().DOAnchorPosX(photo.GetComponent<RectTransform>().anchoredPosition.x + 45, 0.9f).SetEase(Ease.InBack).AsyncWaitForCompletion();
+                await photo.GetComponent<RectTransform>().DOAnchorPosX(photo.GetComponent<RectTransform>().anchoredPosition.x + 50, 0.9f).SetEase(Ease.InBack).AsyncWaitForCompletion();
                 await photo.GetComponent<Image>().DOFade(0, 0.3f).SetEase(Ease.InBack).AsyncWaitForCompletion();
 
                 photo.GetComponent<UIEffects>().onAnotherAnim = false;
                 photo.gameObject.SetActive(false);
-
-                waitChoose = false;
             });
             
             rejectButton.onClick.AddListener(async () =>
@@ -233,19 +220,13 @@ namespace _Project.Scripts.Game.Editing
             }
             else
             {
-                if (rejectPhoto)
+                if (!rejectPhoto)
                 {
-                    print("good save");
-                }
-                else
-                {
-                    AnomalyEditAAAAA.Instance.CatchControl();
-                    AnomalyEditAAAAA.Instance.waitReturn = true;
-                    await UniTask.WaitWhile(() => AnomalyEditAAAAA.Instance.waitReturn);
+                    print("you accept wrong photo");
                 }
             }
 
-            await UniTask.Delay(500);
+            await UniTask.Delay(1000);
         }
 
         public bool rejectPhoto;
