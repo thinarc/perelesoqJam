@@ -3,6 +3,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using _Project.Scripts.Sound;
 
 namespace _Project.Scripts.Game.Editing
 {
@@ -65,6 +66,11 @@ namespace _Project.Scripts.Game.Editing
             generalCanvas.worldCamera = visionCam;
             visionCam.gameObject.SetActive(true);
             DisableView();
+            
+            //ВКЛЮЧАЮ ЗВУК СЦЕНЫ 
+            SoundManager.Instance.SFXHandle.PlayCaution();
+            SoundManager.Instance.AmbientHandle.PlayDeaf();
+            SoundManager.Instance.MusicHandle.SetVolume(0f);
 
             _group.alpha = 1f;
             _group.blocksRaycasts = true;
@@ -156,6 +162,11 @@ namespace _Project.Scripts.Game.Editing
         {
             generalCanvas.worldCamera = _baseCam;
             visionCam.gameObject.SetActive(false);
+            
+            // Возвращаю норм звук
+            SoundManager.Instance.AmbientHandle.StopDeaf();
+            SoundManager.Instance.MusicHandle.PlayBgCello();
+            SoundManager.Instance.MusicHandle.SetVolume(1f);
             
             _group.DOFade(0, 0.3f).SetEase(Ease.InQuad).OnComplete(() => spaceText.DOFade(1, 0));
             _group.blocksRaycasts = false;

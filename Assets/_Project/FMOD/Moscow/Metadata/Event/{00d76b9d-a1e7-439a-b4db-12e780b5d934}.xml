@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{00d76b9d-a1e7-439a-b4db-12e780b5d934}">
-		<property name="note" />
 		<property name="name">
 			<value>Bg_Cello</value>
 		</property>
@@ -120,6 +119,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{5dca8b96-50ba-4267-b8f0-ae32ed0479e0}">
+		<property name="volume">
+			<value>-13</value>
+		</property>
 		<property name="name">
 			<value>Bg_Cello</value>
 		</property>
