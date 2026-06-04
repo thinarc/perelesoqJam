@@ -17,8 +17,13 @@ namespace _Project.Scripts.Common.EntryPoints
 
         private void Start()
         {
+<<<<<<< Updated upstream
             locationSwitcher.StartLocation();
              mainMenu.ShowMenu();
+=======
+            // locationSwitcher.StartLocation();
+            mainMenu.ShowMenu();
+>>>>>>> Stashed changes
         }
     }
 }
