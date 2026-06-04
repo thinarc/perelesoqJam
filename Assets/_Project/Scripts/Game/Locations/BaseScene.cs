@@ -56,8 +56,15 @@ namespace _Project.Scripts.Game.Locations
 
         [SerializeField, Space(5)] private bool streetLight;
 
+        public static bool start;
+
         public virtual async void UpdateLight(bool close = false)
         {
+            if (!start)
+            {
+                start = true;
+                return;
+            }
             _lightToClose = close;
 
             if (!close && streetLight)

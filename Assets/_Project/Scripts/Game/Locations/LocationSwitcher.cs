@@ -54,7 +54,7 @@ namespace _Project.Scripts.Game.Locations
             buttons[4].interactable = DraggableCurtain.Instance.Open;
         }
 
-        public void StartLocation()
+        public async void StartLocation()
         {
             _group.DOFade(1, 0.4f).SetEase(Ease.Linear);
             _group.interactable = true;
@@ -70,8 +70,8 @@ namespace _Project.Scripts.Game.Locations
             _currentLoc = locations[0];
             InitButtons();
             
-            // await UniTask.Delay(2000);
-            // LampBroken?.Invoke();
+            await UniTask.Delay(2000);
+            LampBroken?.Invoke();
         }
 
         private void InitButtons()
@@ -160,6 +160,8 @@ namespace _Project.Scripts.Game.Locations
             
             _currentLoc.scene.UpdateLight(true);
             await _currentLoc.scene.Hide(l.scene.Ease, l.scene.Time);
+            _currentLoc.scene.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            _currentLoc.scene.GetComponent<CanvasGroup>().interactable = false;
             l.scene.Show();
             l.scene.UpdateLight();
             var group = l.scene.GetComponent<CanvasGroup>();

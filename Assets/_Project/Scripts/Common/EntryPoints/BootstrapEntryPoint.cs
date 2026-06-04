@@ -1,3 +1,4 @@
+using _Project.Scripts.Game.Locations;
 using _Project.Scripts.Sound;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,8 @@ namespace _Project.Scripts.Common.EntryPoints
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
+
+            BaseScene.start = false;
             
             SoundManager.Instance.Initialize();
             

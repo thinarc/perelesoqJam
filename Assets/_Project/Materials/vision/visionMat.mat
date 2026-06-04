@@ -136,7 +136,7 @@ Material:
     - _BakedMaterial: 0
     - _BlackTintFade: 1
     - _BlackTintPower: 4
-    - _Brightness: 1
+    - _Brightness: 0.6
     - _BurnEdgeNoiseFactor: 0.5
     - _BurnFade: 1
     - _BurnInsideContrast: 2
@@ -267,12 +267,12 @@ Material:
     - _FrozenHighlightDensity: 1
     - _FrozenSnowContrast: 1
     - _FrozenSnowDensity: 0.25
-    - _FullAlphaDissolveFade: 1
+    - _FullAlphaDissolveFade: 0.6
     - _FullAlphaDissolveWidth: 0.5
     - _FullDistortionFade: 0.94
     - _FullGlowDissolveFade: 0.5
     - _FullGlowDissolveWidth: 0.5
-    - _GaussianBlurFade: 0
+    - _GaussianBlurFade: 1
     - _GaussianBlurOffset: 0.5
     - _GlitchBrightness: 4
     - _GlitchFade: 1

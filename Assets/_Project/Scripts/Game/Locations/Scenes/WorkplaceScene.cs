@@ -1,3 +1,4 @@
+using _Project.Scripts.Game.Stats;
 using _Project.Scripts.Sound;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -11,31 +12,40 @@ namespace _Project.Scripts.Game.Locations.Scenes
         [SerializeField, Space(5)] private Image picture;
         [SerializeField] private Light2D lamp;
         [SerializeField] private Light2D origLight;
+
+        public CanvasGroup butt;
         
         public override async void Initialize(LocationSwitcher switcher)
         {
             base.Initialize(switcher);
             switcher.LampBroken += OnLampBroken;
             
-            // Group = GetComponent<CanvasGroup>();
-            // origLight.gameObject.SetActive(false);
-            // lamp.gameObject.SetActive(true);
-            // Light = lamp;
-            //
-            // gameObject.SetActive(true);
-            //
-            // InitialLight = Light.intensity;
-            // Light.intensity = 0;
-            // while (true)
-            // {
-            //     Light.intensity = Mathf.MoveTowards(Light.intensity, InitialLight, UnityEngine.Time.deltaTime * 0.5f);
-            //     await UniTask.Yield();
-            //     if (Mathf.Approximately(Light.intensity, InitialLight)) break;
-            // }
+            Group = GetComponent<CanvasGroup>();
+            origLight.gameObject.SetActive(false);
+            lamp.gameObject.SetActive(true);
+            Light = lamp;
+            
+            gameObject.SetActive(true);
+            
+            butt.interactable = false;
+            
+            InitialLight = Light.intensity;
+            Light.intensity = 0;
+            
+            while (true)
+            {
+                Light.intensity = Mathf.MoveTowards(Light.intensity, InitialLight, UnityEngine.Time.unscaledDeltaTime * 0.5f);
+                await UniTask.Yield();
+                if (Mathf.Approximately(Light.intensity, InitialLight)) break;
+            }
         }
 
         private async void OnLampBroken()
         {
+            butt.interactable = false;
+            
+            PcStats.Instance.CompleteTraining();
+            
             // тут скрипт что лампа сначала мигает потом гаснет
             // это нужно чтобы анимация стакалась со звуком
             // sound of broken lamp
@@ -76,6 +86,8 @@ namespace _Project.Scripts.Game.Locations.Scenes
             InitialLight = Light.intensity;
             origLight.intensity = 0;
             origLight.gameObject.SetActive(true);
+
+            butt.interactable = true;
         }
     }
 }
