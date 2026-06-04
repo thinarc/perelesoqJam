@@ -20,7 +20,6 @@ namespace _Project.Scripts.Game.Menus
         [SerializeField, Space(5)] private TextMeshProUGUI startText;
         [SerializeField] private ParticleSystem rain;
         
-        [SerializeField, Space(5)] private TextMeshProUGUI headerText;
         [SerializeField] private GameObject creditsCol;
         
         private CanvasGroup _group;
@@ -79,7 +78,6 @@ namespace _Project.Scripts.Game.Menus
             {
                 creditsButton.gameObject.SetActive(false);
                 startText.text = "Вернуться";
-                headerText.text = "Пауза";
             }
         }
 
@@ -98,10 +96,6 @@ namespace _Project.Scripts.Game.Menus
                 SoundManager.Instance.AmbientHandle.GlobalClock();
                 GameEntryPoint.Instance.locationSwitcher.StartLocation();
             }
-            else
-            {
-                headerText.text = "";
-            }
             
             Time.timeScale = 1;
             _open = false;
@@ -114,7 +108,6 @@ namespace _Project.Scripts.Game.Menus
             creditsGroup.DOFade(1, 0.1f).SetEase(Ease.InOutSine).SetUpdate(true);
             creditsGroup.interactable = true;
             creditsGroup.blocksRaycasts = true;
-            headerText.text = "Мы";
             _credits = true;
             creditsCol.SetActive(true);
         }
@@ -125,7 +118,6 @@ namespace _Project.Scripts.Game.Menus
             creditsGroup.DOFade(0, 0.08f).SetEase(Ease.InOutSine).SetUpdate(true);
             creditsGroup.interactable = false;
             creditsGroup.blocksRaycasts = false;
-            headerText.text = "Напротив";
             _credits = false;
             creditsCol.SetActive(false);
         }
