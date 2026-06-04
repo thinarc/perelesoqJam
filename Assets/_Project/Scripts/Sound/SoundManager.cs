@@ -140,7 +140,11 @@ namespace _Project.Scripts.Sound
         {
             Initialize();
         }
-        
+
+        private void Update()
+        {
+            ActionHandle.Tick();
+        }
         
         public void Initialize()
         {

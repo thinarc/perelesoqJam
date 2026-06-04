@@ -92,6 +92,7 @@ namespace _Project.Scripts.Game.Curtain
             if (!dragging || !interactable) return;
 
             var delta = eventData.delta.x * sensitivity;
+            SoundManager.Instance.ActionHandle.AddCurtainVelocity(Mathf.Abs(delta));
 
             if (side == Side.Left)
                 Set(_value - delta);

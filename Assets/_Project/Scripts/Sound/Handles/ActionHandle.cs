@@ -14,11 +14,33 @@ namespace _Project.Scripts.Sound.Handles
         private const float StopDelay = 0.15f; // Время сглаживания «песка»
         private bool _isPlayRequested;
 
+        private float _curtainSpeed;
+
         public void Initialize()
         {
             _openCurtain = RuntimeManager.CreateInstance("event:/SFX/Action/OpenCurtain");
             _brush = RuntimeManager.CreateInstance("event:/SFX/Action/Brush");
             _nag = RuntimeManager.CreateInstance("event:/SFX/Action/Nag");
+
+            _curtainSpeed = 0f;
+        }
+
+        public void Tick()
+        {
+            if (_curtainSpeed > 0) _curtainSpeed -= Time.deltaTime;
+            SetCurtainSpeedParameter(_curtainSpeed);
+        }
+
+        public void AddCurtainVelocity(float velocity)
+        {
+            _curtainSpeed = Mathf.Clamp(_curtainSpeed + velocity, 0f, 1f);
+        }
+
+        private void SetCurtainSpeedParameter(float speed)
+        {
+            speed = Mathf.Clamp(speed, 0, 1);
+            speed = 1f - speed;
+            _openCurtain.setParameterByName("CurtainSpeed", speed);
         }
         
         // Логика звука движения шторы
