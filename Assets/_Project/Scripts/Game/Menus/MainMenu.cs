@@ -20,15 +20,13 @@ namespace _Project.Scripts.Game.Menus
         [SerializeField, Space(5)] private TextMeshProUGUI startText;
         [SerializeField] private ParticleSystem rain;
         
+        [SerializeField, Space(5)] private TextMeshProUGUI headerText;
         [SerializeField] private GameObject creditsCol;
         
         private CanvasGroup _group;
         private bool _open;
         private bool _started;
         private bool _credits;
-
-        public Image[] lightings;
-        public GameObject[] header;
         
         private void Start()
         {
@@ -45,8 +43,6 @@ namespace _Project.Scripts.Game.Menus
             volume.value = SoundManager.Instance.MasterVolume;
             SoundManager.Instance.AmbientHandle.PlayStreet();
             ChooseVolumeHint();
-
-            lightings.ForEach(l => l.DOFade(0, 0).SetUpdate(true));
         }
 
         private float _quitTime = 2f;
@@ -74,11 +70,7 @@ namespace _Project.Scripts.Game.Menus
             _group.interactable = true;
             _group.blocksRaycasts = true;
             
-<<<<<<< Updated upstream
             SoundManager.Instance.AmbientHandle.PlayStreet();
-=======
-            if (!pause) lightings.ForEach(l => l.DOFade(1, 1.4f).SetEase(Ease.InOutSine).SetUpdate(true));
->>>>>>> Stashed changes
             
             _open = true;
             Time.timeScale = 0;
@@ -87,22 +79,18 @@ namespace _Project.Scripts.Game.Menus
             {
                 creditsButton.gameObject.SetActive(false);
                 startText.text = "Вернуться";
+                headerText.text = "Пауза";
             }
         }
 
         public void CloseMenu(bool pause = false)
         {
-            if (!pause) lightings.ForEach(l => l.DOFade(0, 0.4f).SetEase(Ease.InOutSine).SetUpdate(true));
-            header.ForEach(h => h.SetActive(false));
-            
-            if (!pause) _group.DOFade(0, 0.6f).SetEase(Ease.InOutSine).SetUpdate(true);
-            else _group.DOFade(0, 0.2f).SetEase(Ease.InOutSine).SetUpdate(true);
+            _group.DOFade(0, 0.2f).SetEase(Ease.InOutSine).SetUpdate(true);
             _group.interactable = false;
             _group.blocksRaycasts = false;
             
             SoundManager.Instance.AmbientHandle.StopStreet();
             
-<<<<<<< Updated upstream
             rain.gameObject.SetActive(false);
 
             if (!pause && !_started)
@@ -114,9 +102,6 @@ namespace _Project.Scripts.Game.Menus
             {
                 headerText.text = "";
             }
-=======
-            if (!pause && !_started) GameEntryPoint.Instance.locationSwitcher.StartLocation();
->>>>>>> Stashed changes
             
             Time.timeScale = 1;
             _open = false;
@@ -129,6 +114,7 @@ namespace _Project.Scripts.Game.Menus
             creditsGroup.DOFade(1, 0.1f).SetEase(Ease.InOutSine).SetUpdate(true);
             creditsGroup.interactable = true;
             creditsGroup.blocksRaycasts = true;
+            headerText.text = "Мы";
             _credits = true;
             creditsCol.SetActive(true);
         }
@@ -139,6 +125,7 @@ namespace _Project.Scripts.Game.Menus
             creditsGroup.DOFade(0, 0.08f).SetEase(Ease.InOutSine).SetUpdate(true);
             creditsGroup.interactable = false;
             creditsGroup.blocksRaycasts = false;
+            headerText.text = "Напротив";
             _credits = false;
             creditsCol.SetActive(false);
         }
