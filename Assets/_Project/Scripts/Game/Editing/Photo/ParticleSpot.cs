@@ -1,3 +1,4 @@
+using _Project.Scripts.Sound;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,6 +34,11 @@ namespace _Project.Scripts.Game.Editing.Photo
                 return;
 
             _cleaned = true;
+            //нужно проверить какой инструммент в руках => такой звук вкл
+            if (EditController.Instance.currentTool == EditController.ToolType.Brush)
+                SoundManager.Instance.ActionHandle.PlayBrush();
+            else if (EditController.Instance.currentTool == EditController.ToolType.Nag)
+                SoundManager.Instance.ActionHandle.PlayNag();
 
             _image.DOFade(0f, 0.15f)
                 .OnComplete(() =>

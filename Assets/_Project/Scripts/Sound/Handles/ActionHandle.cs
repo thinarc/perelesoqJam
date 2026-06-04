@@ -8,6 +8,8 @@ namespace _Project.Scripts.Sound.Handles
     public class ActionHandle
     {
         private EventInstance _openCurtain;
+        private EventInstance _brush;
+        private EventInstance _nag;
         private float _lastPlayTime;
         private const float StopDelay = 0.15f; // Время сглаживания «песка»
         private bool _isPlayRequested;
@@ -15,8 +17,11 @@ namespace _Project.Scripts.Sound.Handles
         public void Initialize()
         {
             _openCurtain = RuntimeManager.CreateInstance("event:/SFX/Action/OpenCurtain");
+            _brush = RuntimeManager.CreateInstance("event:/SFX/Action/Brush");
+            _nag = RuntimeManager.CreateInstance("event:/SFX/Action/Nag");
         }
-
+        
+        // Логика звука движения шторы
         public void PlayCurtain()
         {
             _openCurtain.getPlaybackState(out var state);
@@ -57,6 +62,17 @@ namespace _Project.Scripts.Sound.Handles
         {
             _lastPlayTime = 0f; // Сбрасываем таймер
             _openCurtain.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+        
+        // Подключчаю звук кисти и логику
+        public void PlayBrush()
+        {
+            _brush.start();
+        }
+        // прикрутить звук ластика
+        public void PlayNag()
+        {
+            _nag.start();
         }
     }
 }
