@@ -59,6 +59,7 @@ namespace _Project.Scripts.Sound.Handles
                 _footsteps.setParameterByName("LowPass", value, false); 
             }
             
+
         }
 
 

@@ -85,7 +85,7 @@ namespace _Project.Scripts.Sound.Handles
 
         public void PlayPhone()
         {
-            _phone.start();
+            // _phone.start();
         }
         
          
