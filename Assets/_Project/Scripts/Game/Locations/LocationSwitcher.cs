@@ -13,6 +13,8 @@ namespace _Project.Scripts.Game.Locations
 {
     public class LocationSwitcher : MonoBehaviour
     {
+        public static LocationSwitcher Instance { get; private set; }
+        
         [SerializeField, Space(5)] private List<LocationData> locations;
 
         [SerializeField, Space(5)] private CanvasGroup buttonGroup;
@@ -20,11 +22,13 @@ namespace _Project.Scripts.Game.Locations
         
         private CanvasGroup _group;
 
-        private LocationData _currentLoc;
+        [HideInInspector] public LocationData _currentLoc;
         private bool _initButtons;
 
         public event Action LampBroken;
         public event Action DoorAnomaly;
+
+        private void Awake() => Instance = this;
 
         private void Start()
         {

@@ -290,6 +290,21 @@ namespace _Project.Scripts.Game.Editing
                 parent.GetChild(randomIndex).SetSiblingIndex(i);
             }
 
+            // Неудачные фото смещаем в последнюю треть списка
+            var startBadIndex = Mathf.Max(count * 2 / 3, 1);
+
+            for (var i = 0; i < count; i++)
+            {
+                var photo = parent.GetChild(i).GetComponent<EditingPhoto>();
+
+                if (photo != null && !photo.acceptable)
+                {
+                    var targetIndex = Random.Range(startBadIndex, count);
+                    photo.transform.SetSiblingIndex(targetIndex);
+                }
+            }
+
+            // Первая фотография должна быть acceptable
             if (count > 0)
             {
                 var firstPhoto = parent.GetChild(0).GetComponent<EditingPhoto>();

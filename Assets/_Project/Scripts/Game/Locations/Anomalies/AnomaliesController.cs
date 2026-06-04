@@ -40,7 +40,7 @@ namespace _Project.Scripts.Game.Locations.Anomalies
             _currentAnomaly = ano;
             _anomalies.Remove(ano);
             checkForAnomaly = false;
-            _hpAnomaly = 5f;
+            _hpAnomaly = ano.hpAno;
 
             ano.pastSprite = ano.target.sprite;
             if (ano.appliedPic.Length == 1) ano.target.sprite = ano.appliedPic[0];
@@ -54,7 +54,8 @@ namespace _Project.Scripts.Game.Locations.Anomalies
                 await UniTask.Yield();
                 if (checkForAnomaly && _hpAnomaly > 0 && !DraggableCurtain.Instance.OneOpen)
                     _hpAnomaly -= Time.deltaTime;
-                if (_hpAnomaly <= 0 && !DraggableCurtain.Instance.OneOpen && _currentAnomaly != null) HideAnomaly();
+                if (_hpAnomaly <= 0 && !DraggableCurtain.Instance.OneOpen && _currentAnomaly != null && LocationSwitcher.Instance._currentLoc.name != "window")
+                    HideAnomaly();
                 if (_currentAnomaly == null) break;
             }
         }
@@ -89,5 +90,6 @@ namespace _Project.Scripts.Game.Locations.Anomalies
         public Image target;
         public Sprite[] appliedPic;
         [HideInInspector] public Sprite pastSprite;
+        public float hpAno;
     }
 }
