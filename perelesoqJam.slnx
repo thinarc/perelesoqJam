@@ -4,9 +4,9 @@
   <Project Path="UniTask.Linq.csproj" />
   <Project Path="TextTween.Editor.csproj" />
   <Project Path="SingularityGroup.HotReload.Runtime.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="AllIn1SpriteShaderAssembly.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="UniTask.Addressables.csproj" />
   <Project Path="FMODUnityResonanceEditor.csproj" />
   <Project Path="FMODUnityEditor.csproj" />
