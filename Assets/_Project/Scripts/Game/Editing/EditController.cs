@@ -93,7 +93,11 @@ namespace _Project.Scripts.Game.Editing
 
             currentProgress++;
             ProgressUpdate?.Invoke();
-            if (currentProgress is 2 or 3 or 5 or 6 or 7 or 8 or 9) YaStartAnomaliyaStreet?.Invoke();
+            if (currentProgress is 2 or 3 or 5 or 6 or 7 or 8 or 9)
+            {
+                await UniTask.Delay(Random.Range(0, 5000));
+                YaStartAnomaliyaStreet?.Invoke();
+            }
             if (currentProgress is 10) GameEnd.Instance.PassGame();
             
             waitCrossLine = false;
@@ -267,9 +271,12 @@ namespace _Project.Scripts.Game.Editing
             }
             else
             {
-                AnomalyEditAAAAA.Instance.CatchControl();
-                AnomalyEditAAAAA.Instance.waitReturn = true;
-                await UniTask.WaitWhile(() => AnomalyEditAAAAA.Instance.waitReturn);
+                if (!rejectPhoto)
+                {
+                    AnomalyEditAAAAA.Instance.CatchControl();
+                    AnomalyEditAAAAA.Instance.waitReturn = true;
+                    await UniTask.WaitWhile(() => AnomalyEditAAAAA.Instance.waitReturn);
+                }
             }
 
             await UniTask.Delay(500);

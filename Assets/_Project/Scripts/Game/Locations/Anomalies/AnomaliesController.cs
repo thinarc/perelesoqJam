@@ -54,7 +54,7 @@ namespace _Project.Scripts.Game.Locations.Anomalies
                 await UniTask.Yield();
                 if (checkForAnomaly && _hpAnomaly > 0 && !DraggableCurtain.Instance.OneOpen)
                     _hpAnomaly -= Time.deltaTime;
-                if (_hpAnomaly <= 0 && !DraggableCurtain.Instance.OneOpen && _currentAnomaly != null && LocationSwitcher.Instance._currentLoc.name != "window")
+                if (_hpAnomaly <= 0 && !DraggableCurtain.Instance.OneOpen && _currentAnomaly != null && LocationSwitcher.Instance._currentLoc.name != "window" && LocationSwitcher.Instance._currentLoc.name != "street")
                     HideAnomaly();
                 if (_currentAnomaly == null) break;
             }

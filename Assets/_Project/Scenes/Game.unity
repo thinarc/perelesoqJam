@@ -2258,31 +2258,41 @@ MonoBehaviour:
     - {fileID: 8173297464960379284, guid: 1adecde5f8752244e9c70d38d1903ebe, type: 3}
     - {fileID: 8173297464960379284, guid: 1adecde5f8752244e9c70d38d1903ebe, type: 3}
     pastSprite: {fileID: 0}
+    hpAno: 7
   - target: {fileID: 1609681992}
     appliedPic:
     - {fileID: 6981828407191158411, guid: 0a23747291bf33145b497c7a29db21cf, type: 3}
     pastSprite: {fileID: 0}
+    hpAno: 8
   - target: {fileID: 166816820}
     appliedPic:
     - {fileID: -3812763548682849600, guid: e02c24da23ce22d46833a63fbbc2c495, type: 3}
     - {fileID: -1550887083, guid: 5fcc83f906ea5bf479001f8130554ce7, type: 3}
     pastSprite: {fileID: 0}
+    hpAno: 14
   - target: {fileID: 1272577393}
     appliedPic:
     - {fileID: 4553099372293145613, guid: 6fd7fcb8a7bc1494bb3256e56b8a8114, type: 3}
     pastSprite: {fileID: 0}
+    hpAno: 8
   - target: {fileID: 1609681992}
     appliedPic:
     - {fileID: 6760420085581148346, guid: 3f9e2cfed777f9e43ad3de793dfcab48, type: 3}
     pastSprite: {fileID: 0}
+    hpAno: 7
   - target: {fileID: 1609681992}
     appliedPic:
     - {fileID: -7009482920759389756, guid: 204a1d3493767f94b9eb283252a9d1f1, type: 3}
     pastSprite: {fileID: 0}
+    hpAno: 10
   - target: {fileID: 1609681992}
     appliedPic:
     - {fileID: 338520981796835827, guid: 994e486d5a50ea646865d33d4f3da432, type: 3}
     pastSprite: {fileID: 0}
+    hpAno: 10
+  checkForAnomaly: 0
+  _hpAnomaly: 0
+  hp: 5
 --- !u!1 &225508712
 GameObject:
   m_ObjectHideFlags: 0
@@ -5756,6 +5766,15 @@ MonoBehaviour:
   - {fileID: 1180268309}
   - {fileID: 1286503613}
   - {fileID: 1419872834}
+  _currentLoc:
+    scene: {fileID: 0}
+    name: 
+    directions:
+      left: 
+      right: 
+      bottom: 
+      up: 
+      things: 
 --- !u!1 &791854399
 GameObject:
   m_ObjectHideFlags: 0
