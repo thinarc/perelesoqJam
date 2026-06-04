@@ -11,6 +11,8 @@ namespace _Project.Scripts.Common.EntryPoints
         public LocationSwitcher locationSwitcher;
         public MainMenu mainMenu;
 
+        [SerializeField, Space(5)] private GameObject editScene;
+
         private void Awake() => Instance = this;
 
         private void Start()
