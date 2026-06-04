@@ -1,4 +1,5 @@
 using _Project.Scripts.Game.Editing;
+using _Project.Scripts.Game.Menus;
 using TMPro;
 using UnityEngine;
 
@@ -44,6 +45,7 @@ namespace _Project.Scripts.Game.Stats
                 var minutes = Mathf.FloorToInt(totalMinutes % 60f);
 
                 UpdateTimeText(hours, minutes);
+                if (hours == 6) GameEnd.Instance.AverageGame();
             }
         }
 
@@ -56,6 +58,11 @@ namespace _Project.Scripts.Game.Stats
         
         private int _lastHour = -1;
         private float _nextUpdateTime;
+
+        public void UpdateFromClick()
+        {
+            _nextUpdateTime = 0f;
+        }
 
         private void UpdateTimeText(int hours, int minutes)
         {

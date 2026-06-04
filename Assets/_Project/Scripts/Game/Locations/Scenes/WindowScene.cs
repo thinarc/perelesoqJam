@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Curtain;
+using _Project.Scripts.Game.Locations.Anomalies;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -42,10 +43,27 @@ namespace _Project.Scripts.Game.Locations.Scenes
 
             streetScene.yaWindow = true;
             streetScene.Show(Ease, Time * 1.02f);
+
+            _hide = false;
+
+            while (true)
+            {
+                await UniTask.Yield();
+                if (DraggableCurtain.Instance.OneOpen)
+                {
+                    AnomaliesController.Instance.checkForAnomaly = true;
+                    break;
+                }
+                if (_hide) break;
+            }
         }
+
+        private bool _hide;
         
         public override async UniTask Hide(Ease ease, float time)
         {
+            _hide = true;
+            
             // 1. ускоряем таймлайн в одном месте
             float streetTime = time * 0.6f;
             float curtainTime = time * 0.7f;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Common.HUD;
 using _Project.Scripts.Game.Editing.Photo;
+using _Project.Scripts.Game.Menus;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.Utilities;
@@ -91,8 +92,15 @@ namespace _Project.Scripts.Game.Editing
             }
 
             currentProgress++;
+            ProgressUpdate?.Invoke();
+            if (currentProgress is 2 or 3 or 5 or 6 or 7 or 8 or 9) YaStartAnomaliyaStreet?.Invoke();
+            if (currentProgress is 10) GameEnd.Instance.PassGame();
+            
             waitCrossLine = false;
         }
+
+        public event Action ProgressUpdate;
+        public event Action YaStartAnomaliyaStreet;
 
         public bool firstShow = true;
         public bool currentWrongPhoto;

@@ -2168,6 +2168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 222812903}
   - component: {fileID: 222812906}
+  - component: {fileID: 222812908}
   - component: {fileID: 222812907}
   - component: {fileID: 222812904}
   m_Layer: 5
@@ -2239,6 +2240,49 @@ MonoBehaviour:
   sky2: {fileID: 21300000, guid: 7637f4d03d8730549a516a3223feb4f8, type: 3}
   skyDelay: 200
   curtain: {fileID: 963801496}
+--- !u!114 &222812908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222812902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e6e0229b674fa884cf0706ae68ba12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Game.Locations.Anomalies.AnomaliesController
+  anomalies:
+  - target: {fileID: 166816820}
+    appliedPic:
+    - {fileID: 8173297464960379284, guid: 1adecde5f8752244e9c70d38d1903ebe, type: 3}
+    - {fileID: 8173297464960379284, guid: 1adecde5f8752244e9c70d38d1903ebe, type: 3}
+    pastSprite: {fileID: 0}
+  - target: {fileID: 1609681992}
+    appliedPic:
+    - {fileID: 6981828407191158411, guid: 0a23747291bf33145b497c7a29db21cf, type: 3}
+    pastSprite: {fileID: 0}
+  - target: {fileID: 166816820}
+    appliedPic:
+    - {fileID: -3812763548682849600, guid: e02c24da23ce22d46833a63fbbc2c495, type: 3}
+    - {fileID: -1550887083, guid: 5fcc83f906ea5bf479001f8130554ce7, type: 3}
+    pastSprite: {fileID: 0}
+  - target: {fileID: 1272577393}
+    appliedPic:
+    - {fileID: 4553099372293145613, guid: 6fd7fcb8a7bc1494bb3256e56b8a8114, type: 3}
+    pastSprite: {fileID: 0}
+  - target: {fileID: 1609681992}
+    appliedPic:
+    - {fileID: 6760420085581148346, guid: 3f9e2cfed777f9e43ad3de793dfcab48, type: 3}
+    pastSprite: {fileID: 0}
+  - target: {fileID: 1609681992}
+    appliedPic:
+    - {fileID: -7009482920759389756, guid: 204a1d3493767f94b9eb283252a9d1f1, type: 3}
+    pastSprite: {fileID: 0}
+  - target: {fileID: 1609681992}
+    appliedPic:
+    - {fileID: 338520981796835827, guid: 994e486d5a50ea646865d33d4f3da432, type: 3}
+    pastSprite: {fileID: 0}
 --- !u!1 &225508712
 GameObject:
   m_ObjectHideFlags: 0
@@ -4958,6 +5002,7 @@ GameObject:
   - component: {fileID: 673687756}
   - component: {fileID: 673687757}
   - component: {fileID: 673687755}
+  - component: {fileID: 673687758}
   m_Layer: 5
   m_Name: timer
   m_TagString: Untagged
@@ -5096,7 +5141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2102a642363246fca6d0d38495405d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIEffects
-  effects: 1
+  effects: 3
   hoverScale: 0.95
   pressScale: 0.9
   scaleDuration: 0.15
@@ -5115,6 +5160,62 @@ MonoBehaviour:
   yaTool: 0
   yaInactiveList: 0
   yaActiveList: 0
+--- !u!114 &673687758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673687753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 673687755}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1672324061}
+        m_TargetAssemblyTypeName: _Project.Scripts.Game.Stats.PcStats, Assembly-CSharp
+        m_MethodName: UpdateFromClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &697472173
 GameObject:
   m_ObjectHideFlags: 0

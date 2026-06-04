@@ -17,6 +17,21 @@ namespace _Project.Scripts.Game.Locations.Scenes
         [SerializeField] private DraggableCurtain curtain;
         
         private Sprite _sky1;
+
+        private Sprite[] _oldSkies;
+
+        public void SetupSkyBlink(Sprite sk1, Sprite sk2)
+        {
+            _oldSkies = new[] {_sky1, sky2};
+            _sky1 = sk1;
+            sky2 = sk2;
+        }
+
+        public void ReturnOldSky()
+        {
+            _sky1 = _oldSkies[0];
+            sky2 = _oldSkies[1];
+        }
         
         public override void Initialize(LocationSwitcher switcher)
         {

@@ -1,5 +1,4 @@
 using _Project.Scripts.Game.Curtain;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
@@ -18,8 +17,8 @@ namespace _Project.Scripts.Curtain
 
         private CanvasGroup _group;
         
-        // public bool Open => left.Open && right.Open;
-        public bool Open => true;
+        public bool Open => left.Open && right.Open;
+        public bool OneOpen => left.Open || right.Open;
         
         private void Awake()
         {
