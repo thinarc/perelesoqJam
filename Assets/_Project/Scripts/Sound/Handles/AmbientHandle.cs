@@ -14,6 +14,8 @@ namespace _Project.Scripts.Sound.Handles
         private EventInstance _deaf;
         private EventInstance _rumble;
         private EventInstance _street;
+        private EventInstance _clock;
+        
         
         // save the link what is current track
         private EventInstance _currentTrack;
@@ -24,6 +26,7 @@ namespace _Project.Scripts.Sound.Handles
             _deaf = RuntimeManager.CreateInstance("event:/bg/Deaf");
             _rumble = RuntimeManager.CreateInstance("event:/bg/Rumble");
             _street = RuntimeManager.CreateInstance("event:/bg/Street");
+            _clock = RuntimeManager.CreateInstance("event:/bg/Clock");
         }
 
         
@@ -80,6 +83,16 @@ namespace _Project.Scripts.Sound.Handles
             _currentTrack = newTrack;
             _currentTrack.start();
         }
+
+        public void GlobalClock()
+        {
+            _clock.start();
+        }
+
+        public void Timeless()
+        {
+            _clock.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
         
         // im setting all parametrs here
         public void SetLowPass(float value)
@@ -89,6 +102,11 @@ namespace _Project.Scripts.Sound.Handles
         public void SetVolume(float value)
         {
             _currentTrack.setParameterByName("Volume", value,  false);
+        }
+
+        public void Nervous(float value)
+        {
+            _clock.setParameterByName("Nervous", value, false);
         }
         
     }

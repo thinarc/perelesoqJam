@@ -224,6 +224,7 @@ namespace _Project.Scripts.Sound
             
             // I set background music there
             MusicHandle.PlayPianoTheme();
+            AmbientHandle.GlobalClock();
             
             
             // сбросить на нормальные значения после инициализации

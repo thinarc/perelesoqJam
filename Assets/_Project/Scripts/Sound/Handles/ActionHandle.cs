@@ -12,6 +12,7 @@ namespace _Project.Scripts.Sound.Handles
         private EventInstance _nag;
         private EventInstance _spray;
         private EventInstance _photo;
+        private EventInstance _cross;
         private float _lastPlayTime;
         private const float StopDelay = 0.15f; // Время сглаживания «песка»
         private bool _isPlayRequested;
@@ -25,6 +26,7 @@ namespace _Project.Scripts.Sound.Handles
             _nag = RuntimeManager.CreateInstance("event:/SFX/Action/Nag");
             _spray = RuntimeManager.CreateInstance("event:/SFX/Action/Spray");
             _photo = RuntimeManager.CreateInstance("event:/SFX/Action/Photo");
+            _cross = RuntimeManager.CreateInstance("event:/SFX/Action/Cross");
             _curtainSpeed = 0f;
         }
 
@@ -120,6 +122,11 @@ namespace _Project.Scripts.Sound.Handles
         public void PlayPhoto()
         {
             _photo.start();
+        }
+        // вычеркнул фотку
+        public void PlayCross()
+        {
+            _cross.start();
         }
     }
 }

@@ -78,6 +78,10 @@ namespace _Project.Scripts.Game.Editing
         public async void CrossOutLine()
         {
             if (_currentPhoto == null) return;
+            
+            //звук вычеркивания
+            SoundManager.Instance.ActionHandle.PlayCross();
+            
             var l = _fillLines[_currentPhoto.numberPhoto];
             while (true)
             {
