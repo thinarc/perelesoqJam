@@ -53,6 +53,8 @@ namespace _Project.Scripts.Game.Editing
             buttonGroup.interactable = false;
             
             _queue = new Queue<EditingPhoto>();
+            ShuffleChildren(GetComponent<RectTransform>());
+            
             GetComponentsInChildren<EditingPhoto>().ToList().ForEach(photo =>
             {
                 photo.GetComponent<Image>().DOFade(0, 0);
@@ -87,6 +89,7 @@ namespace _Project.Scripts.Game.Editing
         }
 
         public bool firstShow = true;
+        public bool currentWrongPhoto;
 
         public async void ShowButtons()
         {
@@ -123,6 +126,8 @@ namespace _Project.Scripts.Game.Editing
             rejectPhoto = false;
             
             var photo = _queue.Dequeue();
+
+            currentWrongPhoto = !photo.acceptable;
             
             _spawner.FillPhoto(photo);
             _currentPhoto = photo;
@@ -148,17 +153,19 @@ namespace _Project.Scripts.Game.Editing
                 var s = shine.childCount;
                 
                 var completeClean = d == 0 && r == 0 && s >= targetS;
+                if (!photo.acceptable) completeClean = d <= 2;
                 
                 await UniTask.Yield();
                 if (completeClean) break;
             }
             
-            photo.PrepareToRotate();
+            photo.PrepareToRotate(out waitChoose);
             prepareRotate = true;
+            
+            await UniTask.WaitUntil(() => waitChoose);
 
             acceptButton.onClick.RemoveAllListeners();
             rejectButton.onClick.RemoveAllListeners();
-            waitChoose = true;
             
             acceptButton.onClick.AddListener(async () =>
             {
@@ -233,16 +240,9 @@ namespace _Project.Scripts.Game.Editing
             }
             else
             {
-                if (rejectPhoto)
-                {
-                    print("good save");
-                }
-                else
-                {
-                    AnomalyEditAAAAA.Instance.CatchControl();
-                    AnomalyEditAAAAA.Instance.waitReturn = true;
-                    await UniTask.WaitWhile(() => AnomalyEditAAAAA.Instance.waitReturn);
-                }
+                AnomalyEditAAAAA.Instance.CatchControl();
+                AnomalyEditAAAAA.Instance.waitReturn = true;
+                await UniTask.WaitWhile(() => AnomalyEditAAAAA.Instance.waitReturn);
             }
 
             await UniTask.Delay(500);
@@ -250,8 +250,22 @@ namespace _Project.Scripts.Game.Editing
 
         public bool rejectPhoto;
         public UIEffects listEffects;
+        
+        private void ShuffleChildren(RectTransform parent)
+        {
+            var count = parent.childCount;
 
-        public void PhotoToLastQueue(EditingPhoto photo)
+            for (var i = count - 1; i > 0; i--)
+            {
+                var randomIndex = Random.Range(0, i + 1);
+
+                parent.GetChild(randomIndex).SetSiblingIndex(i);
+            }
+            
+            buttonGroup.transform.SetAsLastSibling();
+        }
+
+        private void PhotoToLastQueue(EditingPhoto photo)
         {
             photo.GetComponent<Image>().DOFade(0, 0);
             photo.GetComponent<Image>().raycastTarget = false;

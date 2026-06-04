@@ -32,6 +32,8 @@ namespace _Project.Scripts.Game.Editing.Photo
             // if (EditController.Instance.currentTool != requiredTool)
             if (EditController.Instance.currentTool != requiredTool)
                 return;
+            
+            if (requiredTool == EditController.ToolType.Nag && EditController.Instance.currentWrongPhoto) return;
 
             _cleaned = true;
             //нужно проверить какой инструммент в руках => такой звук вкл

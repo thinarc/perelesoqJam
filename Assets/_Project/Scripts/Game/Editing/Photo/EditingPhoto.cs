@@ -48,7 +48,8 @@ namespace _Project.Scripts.Game.Editing.Photo
         {
             if (_rotated)
                 return;
-            
+
+            EditController.Instance.waitChoose = true;
             GetComponent<UIEffects>().photo = true;
             
             _particlesGroup.DOFade(0, 0.2f).SetEase(Ease.InQuad);
@@ -84,8 +85,9 @@ namespace _Project.Scripts.Game.Editing.Photo
             EditController.Instance.ShowButtons();
         }
 
-        public void PrepareToRotate()
+        public void PrepareToRotate(out bool waitChoose)
         {
+            waitChoose = false;
             if (!this) return;
             GetComponent<UIEffects>().photo = false;
             GetComponent<UIEffects>().photoToRotate = true;

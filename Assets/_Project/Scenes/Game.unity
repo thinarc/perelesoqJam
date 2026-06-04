@@ -516,7 +516,7 @@ MonoBehaviour:
   shineRect: {fileID: 2034483991}
   rotatePhoto: {fileID: 4742921405003271249, guid: 62e8e7ae31ded0c4ba7a69811012e351, type: 3}
   acceptable: 1
-  numberPhoto: 0
+  numberPhoto: 9
 --- !u!222 &41469414
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1430,7 +1430,7 @@ MonoBehaviour:
   shineRect: {fileID: 1526163579}
   rotatePhoto: {fileID: -8724143207670424161, guid: c44a47c66bb97114f80e65d598f360ad, type: 3}
   acceptable: 1
-  numberPhoto: 0
+  numberPhoto: 3
 --- !u!114 &155496436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4119,7 +4119,7 @@ MonoBehaviour:
   shineRect: {fileID: 1904529927}
   rotatePhoto: {fileID: 721736881769676902, guid: a2d12569636d60b48b42dc16c1271678, type: 3}
   acceptable: 0
-  numberPhoto: 0
+  numberPhoto: -10
 --- !u!222 &586193796
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5780,9 +5780,9 @@ MonoBehaviour:
   dustRect: {fileID: 536148556}
   dirtRect: {fileID: 2083808323}
   shineRect: {fileID: 1738945529}
-  rotatePhoto: {fileID: -4563702768932240999, guid: 33d1a763a0ea79541b71192f7d8fa70d, type: 3}
+  rotatePhoto: {fileID: -3814092896427154494, guid: 8b2970953e1e6f44fa8412adfeb93815, type: 3}
   acceptable: 0
-  numberPhoto: 0
+  numberPhoto: -10
 --- !u!222 &821054484
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8293,9 +8293,9 @@ MonoBehaviour:
   dustRect: {fileID: 1784452091}
   dirtRect: {fileID: 531680247}
   shineRect: {fileID: 1934897673}
-  rotatePhoto: {fileID: -5753693767916540842, guid: 5d20a9fff3a529042bc0ba30b92afab8, type: 3}
+  rotatePhoto: {fileID: -1476319507323460016, guid: 51858aabd57277c4487ecda8af4b5a88, type: 3}
   acceptable: 0
-  numberPhoto: 0
+  numberPhoto: -10
 --- !u!222 &1183600649
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8854,7 +8854,7 @@ MonoBehaviour:
   shineRect: {fileID: 1407277251}
   rotatePhoto: {fileID: 1706557354664614884, guid: 0c891271efa18ac42a5899b08f961640, type: 3}
   acceptable: 1
-  numberPhoto: 0
+  numberPhoto: 4
 --- !u!222 &1287938491
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8996,7 +8996,7 @@ MonoBehaviour:
   shineRect: {fileID: 1808611502}
   rotatePhoto: {fileID: 6097914640895655436, guid: 73e3447ea1d543946aafc20c367ae9f7, type: 3}
   acceptable: 1
-  numberPhoto: 0
+  numberPhoto: 7
 --- !u!222 &1305889701
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9386,7 +9386,7 @@ MonoBehaviour:
   shineRect: {fileID: 83013325}
   rotatePhoto: {fileID: -7523598740014316590, guid: 86b070425eefd644ab3e41967fd74d42, type: 3}
   acceptable: 1
-  numberPhoto: 0
+  numberPhoto: 1
 --- !u!222 &1344131775
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21860,7 +21860,7 @@ MonoBehaviour:
   shineRect: {fileID: 2135462008}
   rotatePhoto: {fileID: -1476319507323460016, guid: 51858aabd57277c4487ecda8af4b5a88, type: 3}
   acceptable: 1
-  numberPhoto: 0
+  numberPhoto: 6
 --- !u!222 &1777060926
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22870,7 +22870,7 @@ MonoBehaviour:
   shineRect: {fileID: 87440761}
   rotatePhoto: {fileID: 7760528121207465860, guid: 0d044856f918e794d8c360b55b98509a, type: 3}
   acceptable: 1
-  numberPhoto: 0
+  numberPhoto: 8
 --- !u!222 &1887008195
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24478,7 +24478,7 @@ MonoBehaviour:
   shineRect: {fileID: 728723568}
   rotatePhoto: {fileID: -5523558753784587830, guid: 406b4ab63439e204596b379828590254, type: 3}
   acceptable: 1
-  numberPhoto: 0
+  numberPhoto: 5
 --- !u!222 &2103126131
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25107,7 +25107,7 @@ MonoBehaviour:
   shineRect: {fileID: 34817857}
   rotatePhoto: {fileID: 2544793160856378426, guid: 6c9576b2d57c57b4b84240782982578b, type: 3}
   acceptable: 1
-  numberPhoto: 0
+  numberPhoto: 2
 --- !u!222 &2129762339
 CanvasRenderer:
   m_ObjectHideFlags: 0
