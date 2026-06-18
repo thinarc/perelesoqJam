@@ -100,6 +100,11 @@ namespace _Project.Scripts.Game.Editing
             }
             if (currentProgress is 10) GameEnd.Instance.PassGame();
             
+            var list = linesContainer.parent;
+            list.GetComponent<ToolsButton>().enabled = false;
+            list.GetComponent<UIEffects>().yaInactiveList = true;
+            list.GetComponent<UIEffects>().yaActiveList = false;
+            
             waitCrossLine = false;
         }
 
@@ -135,10 +140,6 @@ namespace _Project.Scripts.Game.Editing
         {
             prepareRotate = false;
             waitChoose = false;
-            var list = linesContainer.parent;
-            list.GetComponent<ToolsButton>().enabled = false;
-            list.GetComponent<UIEffects>().yaInactiveList = true;
-            list.GetComponent<UIEffects>().yaActiveList = false;
 
             waitCrossLine = false;
             rejectPhoto = false;

@@ -18,26 +18,28 @@ namespace _Project.Scripts.Game.Locations.Scenes
         public override async void Initialize(LocationSwitcher switcher)
         {
             base.Initialize(switcher);
-            switcher.LampBroken += OnLampBroken;
+            butt.interactable = true;
             
-            Group = GetComponent<CanvasGroup>();
-            origLight.gameObject.SetActive(false);
-            lamp.gameObject.SetActive(true);
-            Light = lamp;
+            // switcher.LampBroken += OnLampBroken;
             
-            gameObject.SetActive(true);
-            
-            butt.interactable = false;
-            
-            InitialLight = Light.intensity;
-            Light.intensity = 0;
-            
-            while (true)
-            {
-                Light.intensity = Mathf.MoveTowards(Light.intensity, InitialLight, UnityEngine.Time.unscaledDeltaTime * 0.5f);
-                await UniTask.Yield();
-                if (Mathf.Approximately(Light.intensity, InitialLight)) break;
-            }
+            // Group = GetComponent<CanvasGroup>();
+            // origLight.gameObject.SetActive(false);
+            // lamp.gameObject.SetActive(true);
+            // Light = lamp;
+            //
+            // gameObject.SetActive(true);
+            //
+            // butt.interactable = false;
+            //
+            // InitialLight = Light.intensity;
+            // Light.intensity = 0;
+            //
+            // while (true)
+            // {
+            //     Light.intensity = Mathf.MoveTowards(Light.intensity, InitialLight, UnityEngine.Time.unscaledDeltaTime * 0.5f);
+            //     await UniTask.Yield();
+            //     if (Mathf.Approximately(Light.intensity, InitialLight)) break;
+            // }
         }
 
         private async void OnLampBroken()

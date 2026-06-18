@@ -1,3 +1,4 @@
+using _Project.Scripts.Game.Locations;
 using UnityEngine;
 
 namespace _Project.Scripts.Common.HUD
@@ -21,6 +22,8 @@ namespace _Project.Scripts.Common.HUD
         private Vector3 initialPosition;
         private Quaternion initialRotation;
 
+        [SerializeField, Space(5)] private bool yaStreet;
+
         private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
@@ -31,6 +34,8 @@ namespace _Project.Scripts.Common.HUD
 
         private void Update()
         {
+            if (yaStreet && LocationSwitcher.Instance._currentLoc.name != "street") return;
+            
             Vector2 mouse = Input.mousePosition;
 
             float normalizedX = (mouse.x / Screen.width - 0.5f) * 2f;

@@ -1,11 +1,11 @@
 using _Project.Scripts.Common.EntryPoints;
 using _Project.Scripts.Sound;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 namespace _Project.Scripts.Game.Menus
 {
@@ -56,8 +56,8 @@ namespace _Project.Scripts.Game.Menus
             if (!_started && _open && !_credits && Input.GetKeyDown(KeyCode.Space)) CloseMenu();
             else if (_credits && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))) CloseCredits();
             
-            if (_started && !_open && Input.GetKeyDown(KeyCode.Escape)) ShowMenu(true);
-            else if (_started && _open && Input.GetKeyDown(KeyCode.Escape)) CloseMenu(true);
+            if (_started && !_open && Input.GetKeyUp(KeyCode.Escape)) ShowMenu(true);
+            else if (_started && _open && Input.GetKeyUp(KeyCode.Escape)) CloseMenu(true);
 
             if (_open && Input.GetKey(KeyCode.LeftArrow)) volume.value -= Time.unscaledDeltaTime * 0.8f;
             else if (_open && Input.GetKey(KeyCode.RightArrow)) volume.value += Time.unscaledDeltaTime * 0.8f;
@@ -68,16 +68,28 @@ namespace _Project.Scripts.Game.Menus
             if (_quitTime < 0f) QuitGame();
         }
 
-        public void ShowMenu(bool pause = false)
+        public async void ShowMenu(bool pause = false)
         {
-            _group.DOFade(1, 0.4f).SetEase(Ease.InOutSine).SetUpdate(true).OnComplete(() => rain.gameObject.SetActive(true));
+            _group.DOFade(1, 0.4f).SetEase(Ease.InOutSine).SetUpdate(true);
             _group.interactable = true;
             _group.blocksRaycasts = true;
             
             SoundManager.Instance.AmbientHandle.PlayStreet();
-            
-            if (!pause) lightings.ForEach(l => l.DOFade(1, 1.4f).SetEase(Ease.InOutSine).SetUpdate(true));
-            
+
+            if (!pause)
+            {
+                lightings.ForEach(l => l.DOFade(1, 1.4f).SetEase(Ease.InOutSine).SetUpdate(true));
+            }
+            else
+            {
+                var main = rain.main;
+                main.prewarm = true;
+
+                await UniTask.WaitForSeconds(0.2f, true);
+            }
+
+            rain.gameObject.SetActive(true);
+
             _open = true;
             Time.timeScale = 0;
 

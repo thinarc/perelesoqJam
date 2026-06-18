@@ -15,7 +15,8 @@ namespace _Project.Scripts.Game.Menus
 
         [SerializeField] private CanvasGroup reloadGroup;
         [SerializeField] private Image[] goodImages;
-        [SerializeField] private Image[] badImages;
+        // [SerializeField] private Image[] badImages;
+        [SerializeField] private CanvasGroup badGroup;
         [SerializeField] private Image[] averageImages;
         
         private CanvasGroup _group;
@@ -35,7 +36,10 @@ namespace _Project.Scripts.Game.Menus
             reloadGroup.interactable = false;
 
             goodImages.ForEach(i => i.DOFade(0, 0));
-            badImages.ForEach(i => i.DOFade(0, 0));
+            // badImages.ForEach(i => i.DOFade(0, 0));
+            badGroup.DOFade(0, 0);
+            badGroup.blocksRaycasts = false;
+            badGroup.interactable = false;
             averageImages.ForEach(i => i.DOFade(0, 0));
         }
         
@@ -93,11 +97,17 @@ namespace _Project.Scripts.Game.Menus
             _group.blocksRaycasts = true;
             _group.interactable = true;
             
-            foreach (var i in badImages)
-            {
-                await i.DOFade(1, 0.4f).SetEase(Ease.Linear).AsyncWaitForCompletion();
-                await UniTask.Delay(1000);
-            }
+            // foreach (var i in badImages)
+            // {
+            //     await i.DOFade(1, 0.4f).SetEase(Ease.Linear).AsyncWaitForCompletion();
+            //     await UniTask.Delay(1000);
+            // }
+
+            await badGroup.DOFade(1, 0.4f).SetEase(Ease.Linear).AsyncWaitForCompletion();
+            await UniTask.Delay(2000);
+            
+            badGroup.GetComponent<Animator>().enabled = true;
+            await UniTask.Delay(1000);
 
             await UniTask.Delay(1000);
 

@@ -9,8 +9,10 @@ namespace _Project.Scripts.Common.EntryPoints
     {
         private void Start()
         {
+#if !UNITY_EDITOR
             Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = false;
+#endif
+            // Cursor.visible = false;
 
             BaseScene.start = false;
             

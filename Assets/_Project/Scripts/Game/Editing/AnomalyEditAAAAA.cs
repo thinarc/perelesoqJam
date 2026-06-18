@@ -1,3 +1,4 @@
+using _Project.Scripts.Game.Locations;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
@@ -33,6 +34,8 @@ namespace _Project.Scripts.Game.Editing
         private float _alphaDissolve;
         private float _gaussianBlur;
 
+        private bool _control;
+
         private void Start()
         {
             _group = GetComponentInChildren<CanvasGroup>();
@@ -54,6 +57,18 @@ namespace _Project.Scripts.Game.Editing
             _group.interactable = false;
         }
 
+        private bool _catchedInDoor;
+        public GameObject toDisableTemp;
+        
+        private void Update()
+        {
+            if (!_control && !_catchedInDoor && LocationSwitcher.Instance._currentLoc.name == "door")
+            {
+                CatchControl();
+                _catchedInDoor = true;
+            }
+        }
+
         private void OnDisable()
         {
             _vision.material.SetFloat(Brightness, _brightness);
@@ -63,6 +78,8 @@ namespace _Project.Scripts.Game.Editing
 
         public async void CatchControl()
         {
+            _control = true;
+            
             generalCanvas.worldCamera = visionCam;
             visionCam.gameObject.SetActive(true);
             DisableView();
@@ -173,6 +190,9 @@ namespace _Project.Scripts.Game.Editing
             _group.interactable = false;
 
             waitReturn = false;
+            _control = false;
+
+            if (_catchedInDoor) toDisableTemp.SetActive(false);
         }
     }
 }
